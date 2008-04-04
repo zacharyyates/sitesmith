@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Authorization">
+  <DataContextMoniker Name="/AuthorizationDataContext" />
+  <nestedChildShapes>
+    <classShape Id="1d3f5840-e3ee-4696-8668-0260c7f0028a" absoluteBounds="0.5, 2.875, 2, 1.3862939453125">
+      <DataClassMoniker Name="/AuthorizationDataContext/Action" />
+      <nestedChildShapes>
+        <elementListCompartment Id="67bc7f7a-7002-445e-911a-e4b715fabf87" absoluteBounds="0.51500000000000012, 3.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2d3e151a-3844-409d-ac3a-1ea8f05f720f" absoluteBounds="6.5, 2.875, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/AuthorizationDataContext/Securable" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b708b54c-5ec4-4642-bd1b-7e5be26a65de" absoluteBounds="6.515, 3.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6af67283-4eff-46ab-ae68-91b33039e4d3" absoluteBounds="3.5, 2.875, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/AuthorizationDataContext/Actor" />
+      <nestedChildShapes>
+        <elementListCompartment Id="52c89dea-ec8b-4cd7-97dc-928d54bd895b" absoluteBounds="3.515, 3.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c88e26bb-c40b-4355-8bf5-4a736e8104ca" absoluteBounds="3.5, 0.5, 2, 1.5785953776041664">
+      <DataClassMoniker Name="/AuthorizationDataContext/Permission" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5cebf331-7cbd-4b46-a085-1870f7ce3587" absoluteBounds="3.515, 0.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.5 : 2.875); (1.5 : 1.28929768880208); (3.5 : 1.28929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AuthorizationDataContext/Action/Action_Permission" />
+      <nodes>
+        <classShapeMoniker Id="1d3f5840-e3ee-4696-8668-0260c7f0028a" />
+        <classShapeMoniker Id="c88e26bb-c40b-4355-8bf5-4a736e8104ca" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.5 : 2.875); (4.5 : 2.07859537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AuthorizationDataContext/Actor/Actor_Permission" />
+      <nodes>
+        <classShapeMoniker Id="6af67283-4eff-46ab-ae68-91b33039e4d3" />
+        <classShapeMoniker Id="c88e26bb-c40b-4355-8bf5-4a736e8104ca" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.5 : 2.875); (7.5 : 1.28929768880208); (5.5 : 1.28929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AuthorizationDataContext/Securable/Securable_Permission" />
+      <nodes>
+        <classShapeMoniker Id="2d3e151a-3844-409d-ac3a-1ea8f05f720f" />
+        <classShapeMoniker Id="c88e26bb-c40b-4355-8bf5-4a736e8104ca" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -1,0 +1,14 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="FCF.master.cs" Inherits="YatesMorrison.SiteSmith.Web.FCF" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="cphHead" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="cphTop" runat="server">
+	
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="cphLeft" runat="server">
+</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="cphContent" runat="server">
+</asp:Content>
+<asp:Content ID="Content5" ContentPlaceHolderID="cphRight" runat="server">
+</asp:Content>
+<asp:Content ID="Content6" ContentPlaceHolderID="cphFooter" runat="server">
+</asp:Content>
