@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="SiteSmith.Authorization" Class="AuthorizationDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=COMPUTRONIX\YMS;Initial Catalog=SiteSmith.Authorization;Integrated Security=True" SettingsObjectName="YatesMorrison.Security.Authorization.Properties.Settings" SettingsPropertyName="SiteSmith_AuthorizationConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Action" Member="Actions">
+    <Type Name="Action">
+      <Column Name="ActionId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ParentIdFk" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Action_Permission" Member="Permissions" OtherKey="ActionIdFk" Type="Permission" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Securable" Member="Securables">
+    <Type Name="Securable">
+      <Column Name="SecurableId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ParentIdFk" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Securable_Permission" Member="Permissions" OtherKey="SecurableIdFk" Type="Permission" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Actor" Member="Actors">
+    <Type Name="Actor">
+      <Column Name="ActorId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ParentIdFk" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="UserIdentifier" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Actor_Permission" Member="Permissions" OtherKey="ActorIdFk" Type="Permission" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Permission" Member="Permissions">
+    <Type Name="Permission">
+      <Column Name="ActorIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ActionIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SecurableIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IsAllowed" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Action_Permission" Member="Action" ThisKey="ActionIdFk" Type="Action" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Actor_Permission" Member="Actor" ThisKey="ActorIdFk" Type="Actor" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Securable_Permission" Member="Securable" ThisKey="SecurableIdFk" Type="Securable" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+</Database>
