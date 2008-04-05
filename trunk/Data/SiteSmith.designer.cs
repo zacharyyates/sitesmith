@@ -57,9 +57,6 @@ namespace YatesMorrison.SiteSmith.Data
     partial void InsertManufacturer(Manufacturer instance);
     partial void UpdateManufacturer(Manufacturer instance);
     partial void DeleteManufacturer(Manufacturer instance);
-    partial void InsertMedia(Media instance);
-    partial void UpdateMedia(Media instance);
-    partial void DeleteMedia(Media instance);
     partial void InsertOrder(Order instance);
     partial void UpdateOrder(Order instance);
     partial void DeleteOrder(Order instance);
@@ -114,6 +111,9 @@ namespace YatesMorrison.SiteSmith.Data
     partial void InsertContact(Contact instance);
     partial void UpdateContact(Contact instance);
     partial void DeleteContact(Contact instance);
+    partial void InsertMedia(Media instance);
+    partial void UpdateMedia(Media instance);
+    partial void DeleteMedia(Media instance);
     #endregion
 		
 		public SiteSmithDataContext() : 
@@ -215,14 +215,6 @@ namespace YatesMorrison.SiteSmith.Data
 			get
 			{
 				return this.GetTable<Manufacturer>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Media> Medias
-		{
-			get
-			{
-				return this.GetTable<Media>();
 			}
 		}
 		
@@ -367,6 +359,14 @@ namespace YatesMorrison.SiteSmith.Data
 			get
 			{
 				return this.GetTable<Contact>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Media> Medias
+		{
+			get
+			{
+				return this.GetTable<Media>();
 			}
 		}
 	}
@@ -1188,7 +1188,7 @@ namespace YatesMorrison.SiteSmith.Data
 			}
 		}
 		
-		[Association(Name="Customer_CustomerFriend1", Storage="_Customer1", ThisKey="FriendIdFk", IsForeignKey=true)]
+		[Association(Name="Customer_CustomerFriend", Storage="_Customer1", ThisKey="FriendIdFk", IsForeignKey=true)]
 		public Customer Customer1
 		{
 			get
@@ -2391,384 +2391,6 @@ namespace YatesMorrison.SiteSmith.Data
 		{
 			this.SendPropertyChanging();
 			entity.Manufacturer = null;
-		}
-	}
-	
-	[Table(Name="dbo.Media")]
-	public partial class Media : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _MediaId;
-		
-		private string _Name;
-		
-		private string _Path;
-		
-		private string _ThumbnailPath;
-		
-		private System.Nullable<byte> _Type;
-		
-		private System.Nullable<int> _Size;
-		
-		private System.Nullable<System.DateTime> _Created;
-		
-		private System.Nullable<System.DateTime> _Modified;
-		
-		private System.Nullable<System.DateTime> _Deleted;
-		
-		private System.Nullable<int> _Width;
-		
-		private System.Nullable<int> _Height;
-		
-		private System.Nullable<int> _ThumbnailWidth;
-		
-		private System.Nullable<int> _ThumbnailHeight;
-		
-		private EntitySet<ProductMedia> _ProductMedias;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnMediaIdChanging(System.Guid value);
-    partial void OnMediaIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnPathChanging(string value);
-    partial void OnPathChanged();
-    partial void OnThumbnailPathChanging(string value);
-    partial void OnThumbnailPathChanged();
-    partial void OnTypeChanging(System.Nullable<byte> value);
-    partial void OnTypeChanged();
-    partial void OnSizeChanging(System.Nullable<int> value);
-    partial void OnSizeChanged();
-    partial void OnCreatedChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedChanged();
-    partial void OnModifiedChanging(System.Nullable<System.DateTime> value);
-    partial void OnModifiedChanged();
-    partial void OnDeletedChanging(System.Nullable<System.DateTime> value);
-    partial void OnDeletedChanged();
-    partial void OnWidthChanging(System.Nullable<int> value);
-    partial void OnWidthChanged();
-    partial void OnHeightChanging(System.Nullable<int> value);
-    partial void OnHeightChanged();
-    partial void OnThumbnailWidthChanging(System.Nullable<int> value);
-    partial void OnThumbnailWidthChanged();
-    partial void OnThumbnailHeightChanging(System.Nullable<int> value);
-    partial void OnThumbnailHeightChanged();
-    #endregion
-		
-		public Media()
-		{
-			this._ProductMedias = new EntitySet<ProductMedia>(new Action<ProductMedia>(this.attach_ProductMedias), new Action<ProductMedia>(this.detach_ProductMedias));
-			OnCreated();
-		}
-		
-		[Column(Storage="_MediaId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid MediaId
-		{
-			get
-			{
-				return this._MediaId;
-			}
-			set
-			{
-				if ((this._MediaId != value))
-				{
-					this.OnMediaIdChanging(value);
-					this.SendPropertyChanging();
-					this._MediaId = value;
-					this.SendPropertyChanged("MediaId");
-					this.OnMediaIdChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Name", DbType="NVarChar(MAX)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Path", DbType="NVarChar(MAX)")]
-		public string Path
-		{
-			get
-			{
-				return this._Path;
-			}
-			set
-			{
-				if ((this._Path != value))
-				{
-					this.OnPathChanging(value);
-					this.SendPropertyChanging();
-					this._Path = value;
-					this.SendPropertyChanged("Path");
-					this.OnPathChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ThumbnailPath", DbType="NVarChar(MAX)")]
-		public string ThumbnailPath
-		{
-			get
-			{
-				return this._ThumbnailPath;
-			}
-			set
-			{
-				if ((this._ThumbnailPath != value))
-				{
-					this.OnThumbnailPathChanging(value);
-					this.SendPropertyChanging();
-					this._ThumbnailPath = value;
-					this.SendPropertyChanged("ThumbnailPath");
-					this.OnThumbnailPathChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Type", DbType="TinyInt")]
-		public System.Nullable<byte> Type
-		{
-			get
-			{
-				return this._Type;
-			}
-			set
-			{
-				if ((this._Type != value))
-				{
-					this.OnTypeChanging(value);
-					this.SendPropertyChanging();
-					this._Type = value;
-					this.SendPropertyChanged("Type");
-					this.OnTypeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Size", DbType="Int")]
-		public System.Nullable<int> Size
-		{
-			get
-			{
-				return this._Size;
-			}
-			set
-			{
-				if ((this._Size != value))
-				{
-					this.OnSizeChanging(value);
-					this.SendPropertyChanging();
-					this._Size = value;
-					this.SendPropertyChanged("Size");
-					this.OnSizeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Created", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Created
-		{
-			get
-			{
-				return this._Created;
-			}
-			set
-			{
-				if ((this._Created != value))
-				{
-					this.OnCreatedChanging(value);
-					this.SendPropertyChanging();
-					this._Created = value;
-					this.SendPropertyChanged("Created");
-					this.OnCreatedChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Modified", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Modified
-		{
-			get
-			{
-				return this._Modified;
-			}
-			set
-			{
-				if ((this._Modified != value))
-				{
-					this.OnModifiedChanging(value);
-					this.SendPropertyChanging();
-					this._Modified = value;
-					this.SendPropertyChanged("Modified");
-					this.OnModifiedChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Deleted", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Deleted
-		{
-			get
-			{
-				return this._Deleted;
-			}
-			set
-			{
-				if ((this._Deleted != value))
-				{
-					this.OnDeletedChanging(value);
-					this.SendPropertyChanging();
-					this._Deleted = value;
-					this.SendPropertyChanged("Deleted");
-					this.OnDeletedChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Width", DbType="Int")]
-		public System.Nullable<int> Width
-		{
-			get
-			{
-				return this._Width;
-			}
-			set
-			{
-				if ((this._Width != value))
-				{
-					this.OnWidthChanging(value);
-					this.SendPropertyChanging();
-					this._Width = value;
-					this.SendPropertyChanged("Width");
-					this.OnWidthChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Height", DbType="Int")]
-		public System.Nullable<int> Height
-		{
-			get
-			{
-				return this._Height;
-			}
-			set
-			{
-				if ((this._Height != value))
-				{
-					this.OnHeightChanging(value);
-					this.SendPropertyChanging();
-					this._Height = value;
-					this.SendPropertyChanged("Height");
-					this.OnHeightChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ThumbnailWidth", DbType="Int")]
-		public System.Nullable<int> ThumbnailWidth
-		{
-			get
-			{
-				return this._ThumbnailWidth;
-			}
-			set
-			{
-				if ((this._ThumbnailWidth != value))
-				{
-					this.OnThumbnailWidthChanging(value);
-					this.SendPropertyChanging();
-					this._ThumbnailWidth = value;
-					this.SendPropertyChanged("ThumbnailWidth");
-					this.OnThumbnailWidthChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ThumbnailHeight", DbType="Int")]
-		public System.Nullable<int> ThumbnailHeight
-		{
-			get
-			{
-				return this._ThumbnailHeight;
-			}
-			set
-			{
-				if ((this._ThumbnailHeight != value))
-				{
-					this.OnThumbnailHeightChanging(value);
-					this.SendPropertyChanging();
-					this._ThumbnailHeight = value;
-					this.SendPropertyChanged("ThumbnailHeight");
-					this.OnThumbnailHeightChanged();
-				}
-			}
-		}
-		
-		[Association(Name="Media_ProductMedia", Storage="_ProductMedias", OtherKey="MediaIdFk")]
-		public EntitySet<ProductMedia> ProductMedias
-		{
-			get
-			{
-				return this._ProductMedias;
-			}
-			set
-			{
-				this._ProductMedias.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_ProductMedias(ProductMedia entity)
-		{
-			this.SendPropertyChanging();
-			entity.Media = this;
-		}
-		
-		private void detach_ProductMedias(ProductMedia entity)
-		{
-			this.SendPropertyChanging();
-			entity.Media = null;
 		}
 	}
 	
@@ -4228,9 +3850,9 @@ namespace YatesMorrison.SiteSmith.Data
 		
 		private System.Nullable<bool> _IsVisible;
 		
-		private EntityRef<Media> _Media;
-		
 		private EntityRef<Product> _Product;
+		
+		private EntityRef<Media> _Media;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -4246,8 +3868,8 @@ namespace YatesMorrison.SiteSmith.Data
 		
 		public ProductMedia()
 		{
-			this._Media = default(EntityRef<Media>);
 			this._Product = default(EntityRef<Product>);
+			this._Media = default(EntityRef<Media>);
 			OnCreated();
 		}
 		
@@ -4319,40 +3941,6 @@ namespace YatesMorrison.SiteSmith.Data
 			}
 		}
 		
-		[Association(Name="Media_ProductMedia", Storage="_Media", ThisKey="MediaIdFk", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public Media Media
-		{
-			get
-			{
-				return this._Media.Entity;
-			}
-			set
-			{
-				Media previousValue = this._Media.Entity;
-				if (((previousValue != value) 
-							|| (this._Media.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Media.Entity = null;
-						previousValue.ProductMedias.Remove(this);
-					}
-					this._Media.Entity = value;
-					if ((value != null))
-					{
-						value.ProductMedias.Add(this);
-						this._MediaIdFk = value.MediaId;
-					}
-					else
-					{
-						this._MediaIdFk = default(System.Guid);
-					}
-					this.SendPropertyChanged("Media");
-				}
-			}
-		}
-		
 		[Association(Name="Product_ProductMedia", Storage="_Product", ThisKey="ProductIdFk", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Product Product
 		{
@@ -4383,6 +3971,40 @@ namespace YatesMorrison.SiteSmith.Data
 						this._ProductIdFk = default(System.Guid);
 					}
 					this.SendPropertyChanged("Product");
+				}
+			}
+		}
+		
+		[Association(Name="Media_ProductMedia", Storage="_Media", ThisKey="MediaIdFk", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Media Media
+		{
+			get
+			{
+				return this._Media.Entity;
+			}
+			set
+			{
+				Media previousValue = this._Media.Entity;
+				if (((previousValue != value) 
+							|| (this._Media.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Media.Entity = null;
+						previousValue.ProductMedias.Remove(this);
+					}
+					this._Media.Entity = value;
+					if ((value != null))
+					{
+						value.ProductMedias.Add(this);
+						this._MediaIdFk = value.MediaId;
+					}
+					else
+					{
+						this._MediaIdFk = default(System.Guid);
+					}
+					this.SendPropertyChanged("Media");
 				}
 			}
 		}
@@ -6637,7 +6259,7 @@ namespace YatesMorrison.SiteSmith.Data
 			}
 		}
 		
-		[Association(Name="Customer_CustomerFriend1", Storage="_CustomerFriends1", OtherKey="FriendIdFk")]
+		[Association(Name="Customer_CustomerFriend", Storage="_CustomerFriends1", OtherKey="FriendIdFk")]
 		public EntitySet<CustomerFriend> Friends
 		{
 			get
@@ -7192,6 +6814,336 @@ namespace YatesMorrison.SiteSmith.Data
 		{
 			this.SendPropertyChanging();
 			entity.Contact = null;
+		}
+	}
+	
+	[Table(Name="dbo.Media")]
+	public partial class Media : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _MediaId;
+		
+		private string _Name;
+		
+		private string _Path;
+		
+		private System.Nullable<byte> _Type;
+		
+		private System.Nullable<int> _Size;
+		
+		private System.Nullable<System.DateTime> _Created;
+		
+		private System.Nullable<System.DateTime> _Modified;
+		
+		private System.Nullable<System.DateTime> _Deleted;
+		
+		private System.Nullable<int> _Width;
+		
+		private System.Nullable<int> _Height;
+		
+		private string _FileExtension;
+		
+		private EntitySet<ProductMedia> _ProductMedias;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnMediaIdChanging(System.Guid value);
+    partial void OnMediaIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnPathChanging(string value);
+    partial void OnPathChanged();
+    partial void OnTypeChanging(System.Nullable<byte> value);
+    partial void OnTypeChanged();
+    partial void OnSizeChanging(System.Nullable<int> value);
+    partial void OnSizeChanged();
+    partial void OnCreatedChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedChanged();
+    partial void OnModifiedChanging(System.Nullable<System.DateTime> value);
+    partial void OnModifiedChanged();
+    partial void OnDeletedChanging(System.Nullable<System.DateTime> value);
+    partial void OnDeletedChanged();
+    partial void OnWidthChanging(System.Nullable<int> value);
+    partial void OnWidthChanged();
+    partial void OnHeightChanging(System.Nullable<int> value);
+    partial void OnHeightChanged();
+    partial void OnFileExtensionChanging(string value);
+    partial void OnFileExtensionChanged();
+    #endregion
+		
+		public Media()
+		{
+			this._ProductMedias = new EntitySet<ProductMedia>(new Action<ProductMedia>(this.attach_ProductMedias), new Action<ProductMedia>(this.detach_ProductMedias));
+			OnCreated();
+		}
+		
+		[Column(Storage="_MediaId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid MediaId
+		{
+			get
+			{
+				return this._MediaId;
+			}
+			set
+			{
+				if ((this._MediaId != value))
+				{
+					this.OnMediaIdChanging(value);
+					this.SendPropertyChanging();
+					this._MediaId = value;
+					this.SendPropertyChanged("MediaId");
+					this.OnMediaIdChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Name", DbType="NVarChar(MAX)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Path", DbType="NVarChar(MAX)")]
+		public string Path
+		{
+			get
+			{
+				return this._Path;
+			}
+			set
+			{
+				if ((this._Path != value))
+				{
+					this.OnPathChanging(value);
+					this.SendPropertyChanging();
+					this._Path = value;
+					this.SendPropertyChanged("Path");
+					this.OnPathChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Type", DbType="TinyInt")]
+		public System.Nullable<byte> Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this.OnTypeChanging(value);
+					this.SendPropertyChanging();
+					this._Type = value;
+					this.SendPropertyChanged("Type");
+					this.OnTypeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Size", DbType="Int")]
+		public System.Nullable<int> Size
+		{
+			get
+			{
+				return this._Size;
+			}
+			set
+			{
+				if ((this._Size != value))
+				{
+					this.OnSizeChanging(value);
+					this.SendPropertyChanging();
+					this._Size = value;
+					this.SendPropertyChanged("Size");
+					this.OnSizeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Created", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Created
+		{
+			get
+			{
+				return this._Created;
+			}
+			set
+			{
+				if ((this._Created != value))
+				{
+					this.OnCreatedChanging(value);
+					this.SendPropertyChanging();
+					this._Created = value;
+					this.SendPropertyChanged("Created");
+					this.OnCreatedChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Modified", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Modified
+		{
+			get
+			{
+				return this._Modified;
+			}
+			set
+			{
+				if ((this._Modified != value))
+				{
+					this.OnModifiedChanging(value);
+					this.SendPropertyChanging();
+					this._Modified = value;
+					this.SendPropertyChanged("Modified");
+					this.OnModifiedChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Deleted", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Deleted
+		{
+			get
+			{
+				return this._Deleted;
+			}
+			set
+			{
+				if ((this._Deleted != value))
+				{
+					this.OnDeletedChanging(value);
+					this.SendPropertyChanging();
+					this._Deleted = value;
+					this.SendPropertyChanged("Deleted");
+					this.OnDeletedChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Width", DbType="Int")]
+		public System.Nullable<int> Width
+		{
+			get
+			{
+				return this._Width;
+			}
+			set
+			{
+				if ((this._Width != value))
+				{
+					this.OnWidthChanging(value);
+					this.SendPropertyChanging();
+					this._Width = value;
+					this.SendPropertyChanged("Width");
+					this.OnWidthChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Height", DbType="Int")]
+		public System.Nullable<int> Height
+		{
+			get
+			{
+				return this._Height;
+			}
+			set
+			{
+				if ((this._Height != value))
+				{
+					this.OnHeightChanging(value);
+					this.SendPropertyChanging();
+					this._Height = value;
+					this.SendPropertyChanged("Height");
+					this.OnHeightChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FileExtension", DbType="NVarChar(50)")]
+		public string FileExtension
+		{
+			get
+			{
+				return this._FileExtension;
+			}
+			set
+			{
+				if ((this._FileExtension != value))
+				{
+					this.OnFileExtensionChanging(value);
+					this.SendPropertyChanging();
+					this._FileExtension = value;
+					this.SendPropertyChanged("FileExtension");
+					this.OnFileExtensionChanged();
+				}
+			}
+		}
+		
+		[Association(Name="Media_ProductMedia", Storage="_ProductMedias", OtherKey="MediaIdFk")]
+		public EntitySet<ProductMedia> ProductMedias
+		{
+			get
+			{
+				return this._ProductMedias;
+			}
+			set
+			{
+				this._ProductMedias.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ProductMedias(ProductMedia entity)
+		{
+			this.SendPropertyChanging();
+			entity.Media = this;
+		}
+		
+		private void detach_ProductMedias(ProductMedia entity)
+		{
+			this.SendPropertyChanging();
+			entity.Media = null;
 		}
 	}
 }
