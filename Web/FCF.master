@@ -1,14 +1,115 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="FCF.master.cs" Inherits="YatesMorrison.SiteSmith.Web.FCF" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="cphHead" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="cphTop" runat="server">
-	
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="cphLeft" runat="server">
-</asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="cphContent" runat="server">
-</asp:Content>
-<asp:Content ID="Content5" ContentPlaceHolderID="cphRight" runat="server">
-</asp:Content>
-<asp:Content ID="Content6" ContentPlaceHolderID="cphFooter" runat="server">
+﻿<%@ Master Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="FCF.master.cs" Inherits="YatesMorrison.SiteSmith.Web.FCF" %>
+<asp:Content ContentPlaceHolderID="cphMain" runat="server">
+    <!--Header-->
+    <div id="header">
+    <div class="container">
+        <h1><a href="#" title="Frederick County Firearms">Frederick County Firearms<span></span></a></h1>
+        <hr />
+        <!--Top Navigation-->
+        <ul id="navigation">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Store</a></li>
+            <li><a href="#">Training</a></li>
+        </ul>
+        <hr />
+        <div id="banner">
+         	Frederick County Firearms is Northern Virginia’s premium Firearms Store. We offer a large variety of firearms, ammunition and tactical Gear. In addition we will offer Firearms training.
+        </div>
+        <hr />
+    </div>
+</div>
+<!--Main Content-->
+<div id="main" class="container">
+    <!--Left Column-->
+    <div id="leftcolumn">
+        <h3 class="leftbox">Departments</h3>
+        <ul class="leftbox borderedlist">
+            <li><a href="#" title="Firearms">Firearms</a></li>
+            <li><a href="#" title="Ammunition">Ammunition</a></li>
+            <li><a href="#" title="Tacticle">Tactical</a></li>
+        </ul>
+        <h3 class="leftbox header_small">Featured</h3>
+        <div class="leftbox features">
+            <p>Some slick text about how awesome FCF is.</p>            
+        </div>
+        <hr />
+    </div>
+    <!--Main Content Area-->
+    <div id="center">
+        <div class="article_wrapper">
+            <h2>What's New at Frederick County Firearms</h2>
+            <p>This week we have added new weapons of mass destruction for your purchasing enjoyment.</p>
+        </div>
+        <div class="article_wrapper">
+            <h2>What's Less New at FCF.</h2>
+            <p>Some slightly older news.</p>
+        </div>
+    </div>
+    <!--Product sales boxes-->
+    <div id="rightcolumn">
+        <div class="rightbox_wrapper">
+            <div class="rightbox">
+                <img src="Images/product.jpg" class="product_image" alt="Product Name" />
+                <div class="product_wrapper">
+                    Check out these great tactical boots, that will help you stomp thy enemy's brains out.
+                </div>
+            </div>
+        </div>
+        <div class="rightbox_wrapper">
+            <div class="rightbox">
+                <img src="Images/product.jpg" class="product_image" alt="Product Name" />
+                <div class="product_wrapper">
+                    Product the second.
+                </div>
+            </div>
+        </div>
+        <div class="rightbox_wrapper lastbox">
+            <div class="rightbox">
+                <img src="Images/product.jpg" class="product_image" alt="Product Name" />
+                <div class="product_wrapper">
+                    Features product the last.
+                </div>
+            </div>
+        </div> 
+        <hr />       
+    </div>
+</div>
+<!--Start Bottom Information-->
+<div id="bottominfo">
+    <div class="container">
+        <!--Bottom Left Information-->
+        <div class="bottomcolumn">
+            <h3>Contacting Us</h3>
+            <p>Phone 540.678.9110</p>
+            <p>Fax 540.678.9115</p> 
+            <p>31 E. JubalEarly Dr.</p>
+            <p>Winchester, VA 22601</p>
+        </div>
+        <div class="bottomcolumn">
+            <h3>Some Other Information</h3>
+            <ul class="borderedlist iconlist">
+                <li><a href="#">Linky</a></li>
+                <li><a href="#">Linky Too</a></li>
+            </ul>
+        </div>
+        <div class="bottomcolumn bottomright">
+            <h3>Sign Up For Spam</h3>
+            <p>If you are sucker enough to put your email in there and hit Submit, you too can get spammed!</p>
+            <form action="#">
+                <asp:TextBox ID="tbEmail" runat="server" CssClass="enewsbox"></asp:TextBox>
+                <asp:Button ID="bSubmit" runat="server" Text="Submit" CssClass="button" />              
+            </form>
+    </div>
+</div>
+<!--Start Footer-->
+<div id="footer">
+    <div class="container">
+        <a id="designby" href="http://www.yatesmorrison.com" title="SiteSmith">Powered by SiteSmith</a>
+        <ul id="footer_navigation">
+            <li><a href="#" title="Home">Home</a></li>
+            <li><a href="#" title="Store">Store</a></li>
+            <li><a href="#" title="Training">Training</a></li>
+        </ul>
+    </div>
+</div>
 </asp:Content>
