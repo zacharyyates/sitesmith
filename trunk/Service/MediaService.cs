@@ -4,12 +4,13 @@
  */
 
 using System;
-using YatesMorrison.SiteSmith.Data;
-using System.IO;
 using System.Configuration;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
+
+using YatesMorrison.SiteSmith.Data;
 
 namespace YatesMorrison.SiteSmith.Service
 {
