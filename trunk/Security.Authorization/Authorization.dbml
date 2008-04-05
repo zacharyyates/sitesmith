@@ -6,7 +6,9 @@
       <Column Name="ActionId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ParentIdFk" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Action_Action" Member="Children" OtherKey="ParentIdFk" Type="Action" />
       <Association Name="Action_Permission" Member="Permissions" OtherKey="ActionIdFk" Type="Permission" />
+      <Association Name="Action_Action" Member="Parent" ThisKey="ParentIdFk" Type="Action" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Securable" Member="Securables">
@@ -14,7 +16,9 @@
       <Column Name="SecurableId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ParentIdFk" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Securable_Securable" Member="Children" OtherKey="ParentIdFk" Type="Securable" />
       <Association Name="Securable_Permission" Member="Permissions" OtherKey="SecurableIdFk" Type="Permission" />
+      <Association Name="Securable_Securable" Member="Parent" ThisKey="ParentIdFk" Type="Securable" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Actor" Member="Actors">
@@ -22,7 +26,9 @@
       <Column Name="ActorId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ParentIdFk" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="UserIdentifier" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Actor_Actor" Member="Children" OtherKey="ParentIdFk" Type="Actor" />
       <Association Name="Actor_Permission" Member="Permissions" OtherKey="ActorIdFk" Type="Permission" />
+      <Association Name="Actor_Actor" Member="Parent" ThisKey="ParentIdFk" Type="Actor" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Permission" Member="Permissions">

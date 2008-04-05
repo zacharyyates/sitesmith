@@ -39,9 +39,6 @@ namespace YatesMorrison.SiteSmith.Data
     partial void InsertAddress(Address instance);
     partial void UpdateAddress(Address instance);
     partial void DeleteAddress(Address instance);
-    partial void InsertContact(Contact instance);
-    partial void UpdateContact(Contact instance);
-    partial void DeleteContact(Contact instance);
     partial void InsertCustomerFriend(CustomerFriend instance);
     partial void UpdateCustomerFriend(CustomerFriend instance);
     partial void DeleteCustomerFriend(CustomerFriend instance);
@@ -114,6 +111,9 @@ namespace YatesMorrison.SiteSmith.Data
     partial void InsertCustomer(Customer instance);
     partial void UpdateCustomer(Customer instance);
     partial void DeleteCustomer(Customer instance);
+    partial void InsertContact(Contact instance);
+    partial void UpdateContact(Contact instance);
+    partial void DeleteContact(Contact instance);
     #endregion
 		
 		public SiteSmithDataContext() : 
@@ -167,14 +167,6 @@ namespace YatesMorrison.SiteSmith.Data
 			get
 			{
 				return this.GetTable<Address>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Contact> Contacts
-		{
-			get
-			{
-				return this.GetTable<Contact>();
 			}
 		}
 		
@@ -367,6 +359,14 @@ namespace YatesMorrison.SiteSmith.Data
 			get
 			{
 				return this.GetTable<Customer>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Contact> Contacts
+		{
+			get
+			{
+				return this.GetTable<Contact>();
 			}
 		}
 	}
@@ -1092,276 +1092,6 @@ namespace YatesMorrison.SiteSmith.Data
 		}
 	}
 	
-	[Table(Name="dbo.Contact")]
-	public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _ContactId;
-		
-		private string _FirstName;
-		
-		private string _LastName;
-		
-		private string _Title;
-		
-		private string _Company;
-		
-		private EntitySet<Address> _Addresses;
-		
-		private EntitySet<Manufacturer> _Manufacturers;
-		
-		private EntitySet<Phone> _Phones;
-		
-		private EntitySet<Customer> _Customers;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnContactIdChanging(System.Guid value);
-    partial void OnContactIdChanged();
-    partial void OnFirstNameChanging(string value);
-    partial void OnFirstNameChanged();
-    partial void OnLastNameChanging(string value);
-    partial void OnLastNameChanged();
-    partial void OnTitleChanging(string value);
-    partial void OnTitleChanged();
-    partial void OnCompanyChanging(string value);
-    partial void OnCompanyChanged();
-    #endregion
-		
-		public Contact()
-		{
-			this._Addresses = new EntitySet<Address>(new Action<Address>(this.attach_Addresses), new Action<Address>(this.detach_Addresses));
-			this._Manufacturers = new EntitySet<Manufacturer>(new Action<Manufacturer>(this.attach_Manufacturers), new Action<Manufacturer>(this.detach_Manufacturers));
-			this._Phones = new EntitySet<Phone>(new Action<Phone>(this.attach_Phones), new Action<Phone>(this.detach_Phones));
-			this._Customers = new EntitySet<Customer>(new Action<Customer>(this.attach_Customers), new Action<Customer>(this.detach_Customers));
-			OnCreated();
-		}
-		
-		[Column(Storage="_ContactId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid ContactId
-		{
-			get
-			{
-				return this._ContactId;
-			}
-			set
-			{
-				if ((this._ContactId != value))
-				{
-					this.OnContactIdChanging(value);
-					this.SendPropertyChanging();
-					this._ContactId = value;
-					this.SendPropertyChanged("ContactId");
-					this.OnContactIdChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FirstName", DbType="NVarChar(MAX)")]
-		public string FirstName
-		{
-			get
-			{
-				return this._FirstName;
-			}
-			set
-			{
-				if ((this._FirstName != value))
-				{
-					this.OnFirstNameChanging(value);
-					this.SendPropertyChanging();
-					this._FirstName = value;
-					this.SendPropertyChanged("FirstName");
-					this.OnFirstNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_LastName", DbType="NVarChar(MAX)")]
-		public string LastName
-		{
-			get
-			{
-				return this._LastName;
-			}
-			set
-			{
-				if ((this._LastName != value))
-				{
-					this.OnLastNameChanging(value);
-					this.SendPropertyChanging();
-					this._LastName = value;
-					this.SendPropertyChanged("LastName");
-					this.OnLastNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Title", DbType="NVarChar(MAX)")]
-		public string Title
-		{
-			get
-			{
-				return this._Title;
-			}
-			set
-			{
-				if ((this._Title != value))
-				{
-					this.OnTitleChanging(value);
-					this.SendPropertyChanging();
-					this._Title = value;
-					this.SendPropertyChanged("Title");
-					this.OnTitleChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Company", DbType="NVarChar(MAX)")]
-		public string Company
-		{
-			get
-			{
-				return this._Company;
-			}
-			set
-			{
-				if ((this._Company != value))
-				{
-					this.OnCompanyChanging(value);
-					this.SendPropertyChanging();
-					this._Company = value;
-					this.SendPropertyChanged("Company");
-					this.OnCompanyChanged();
-				}
-			}
-		}
-		
-		[Association(Name="Contact_Address", Storage="_Addresses", OtherKey="ContactIdFk")]
-		public EntitySet<Address> Addresses
-		{
-			get
-			{
-				return this._Addresses;
-			}
-			set
-			{
-				this._Addresses.Assign(value);
-			}
-		}
-		
-		[Association(Name="Contact_Manufacturer", Storage="_Manufacturers", OtherKey="ContactIdFk")]
-		public EntitySet<Manufacturer> Manufacturers
-		{
-			get
-			{
-				return this._Manufacturers;
-			}
-			set
-			{
-				this._Manufacturers.Assign(value);
-			}
-		}
-		
-		[Association(Name="Contact_Phone", Storage="_Phones", OtherKey="ContactIdFk")]
-		public EntitySet<Phone> Phones
-		{
-			get
-			{
-				return this._Phones;
-			}
-			set
-			{
-				this._Phones.Assign(value);
-			}
-		}
-		
-		[Association(Name="Contact_Customer", Storage="_Customers", OtherKey="ContactIdFk")]
-		public EntitySet<Customer> Customers
-		{
-			get
-			{
-				return this._Customers;
-			}
-			set
-			{
-				this._Customers.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Addresses(Address entity)
-		{
-			this.SendPropertyChanging();
-			entity.Contact = this;
-		}
-		
-		private void detach_Addresses(Address entity)
-		{
-			this.SendPropertyChanging();
-			entity.Contact = null;
-		}
-		
-		private void attach_Manufacturers(Manufacturer entity)
-		{
-			this.SendPropertyChanging();
-			entity.Contact = this;
-		}
-		
-		private void detach_Manufacturers(Manufacturer entity)
-		{
-			this.SendPropertyChanging();
-			entity.Contact = null;
-		}
-		
-		private void attach_Phones(Phone entity)
-		{
-			this.SendPropertyChanging();
-			entity.Contact = this;
-		}
-		
-		private void detach_Phones(Phone entity)
-		{
-			this.SendPropertyChanging();
-			entity.Contact = null;
-		}
-		
-		private void attach_Customers(Customer entity)
-		{
-			this.SendPropertyChanging();
-			entity.Contact = this;
-		}
-		
-		private void detach_Customers(Customer entity)
-		{
-			this.SendPropertyChanging();
-			entity.Contact = null;
-		}
-	}
-	
 	[Table(Name="dbo.CustomerFriend")]
 	public partial class CustomerFriend : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1373,8 +1103,6 @@ namespace YatesMorrison.SiteSmith.Data
 		private System.Guid _FriendIdFk;
 		
 		private System.Nullable<bool> _IsBlocked;
-		
-		private EntityRef<Customer> _Customer;
 		
 		private EntityRef<Customer> _Customer1;
 		
@@ -1392,7 +1120,6 @@ namespace YatesMorrison.SiteSmith.Data
 		
 		public CustomerFriend()
 		{
-			this._Customer = default(EntityRef<Customer>);
 			this._Customer1 = default(EntityRef<Customer>);
 			OnCreated();
 		}
@@ -1408,10 +1135,6 @@ namespace YatesMorrison.SiteSmith.Data
 			{
 				if ((this._CustomerIdFk != value))
 				{
-					if (this._Customer.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnCustomerIdFkChanging(value);
 					this.SendPropertyChanging();
 					this._CustomerIdFk = value;
@@ -1465,40 +1188,6 @@ namespace YatesMorrison.SiteSmith.Data
 			}
 		}
 		
-		[Association(Name="Customer_CustomerFriend", Storage="_Customer", ThisKey="CustomerIdFk", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public Customer Customer
-		{
-			get
-			{
-				return this._Customer.Entity;
-			}
-			set
-			{
-				Customer previousValue = this._Customer.Entity;
-				if (((previousValue != value) 
-							|| (this._Customer.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Customer.Entity = null;
-						previousValue.CustomerFriends.Remove(this);
-					}
-					this._Customer.Entity = value;
-					if ((value != null))
-					{
-						value.CustomerFriends.Add(this);
-						this._CustomerIdFk = value.CustomerId;
-					}
-					else
-					{
-						this._CustomerIdFk = default(System.Guid);
-					}
-					this.SendPropertyChanged("Customer");
-				}
-			}
-		}
-		
 		[Association(Name="Customer_CustomerFriend1", Storage="_Customer1", ThisKey="FriendIdFk", IsForeignKey=true)]
 		public Customer Customer1
 		{
@@ -1516,12 +1205,12 @@ namespace YatesMorrison.SiteSmith.Data
 					if ((previousValue != null))
 					{
 						this._Customer1.Entity = null;
-						previousValue.CustomerFriends1.Remove(this);
+						previousValue.Friends.Remove(this);
 					}
 					this._Customer1.Entity = value;
 					if ((value != null))
 					{
-						value.CustomerFriends1.Add(this);
+						value.Friends.Add(this);
 						this._FriendIdFk = value.CustomerId;
 					}
 					else
@@ -6748,8 +6437,6 @@ namespace YatesMorrison.SiteSmith.Data
 		
 		private System.Nullable<decimal> _TimezoneOffset;
 		
-		private EntitySet<CustomerFriend> _CustomerFriends;
-		
 		private EntitySet<CustomerFriend> _CustomerFriends1;
 		
 		private EntitySet<Feedback> _Feedbacks;
@@ -6790,7 +6477,6 @@ namespace YatesMorrison.SiteSmith.Data
 		
 		public Customer()
 		{
-			this._CustomerFriends = new EntitySet<CustomerFriend>(new Action<CustomerFriend>(this.attach_CustomerFriends), new Action<CustomerFriend>(this.detach_CustomerFriends));
 			this._CustomerFriends1 = new EntitySet<CustomerFriend>(new Action<CustomerFriend>(this.attach_CustomerFriends1), new Action<CustomerFriend>(this.detach_CustomerFriends1));
 			this._Feedbacks = new EntitySet<Feedback>(new Action<Feedback>(this.attach_Feedbacks), new Action<Feedback>(this.detach_Feedbacks));
 			this._FeedbackFlags = new EntitySet<FeedbackFlag>(new Action<FeedbackFlag>(this.attach_FeedbackFlags), new Action<FeedbackFlag>(this.detach_FeedbackFlags));
@@ -6951,21 +6637,8 @@ namespace YatesMorrison.SiteSmith.Data
 			}
 		}
 		
-		[Association(Name="Customer_CustomerFriend", Storage="_CustomerFriends", OtherKey="CustomerIdFk")]
-		public EntitySet<CustomerFriend> CustomerFriends
-		{
-			get
-			{
-				return this._CustomerFriends;
-			}
-			set
-			{
-				this._CustomerFriends.Assign(value);
-			}
-		}
-		
 		[Association(Name="Customer_CustomerFriend1", Storage="_CustomerFriends1", OtherKey="FriendIdFk")]
-		public EntitySet<CustomerFriend> CustomerFriends1
+		public EntitySet<CustomerFriend> Friends
 		{
 			get
 			{
@@ -7143,18 +6816,6 @@ namespace YatesMorrison.SiteSmith.Data
 			}
 		}
 		
-		private void attach_CustomerFriends(CustomerFriend entity)
-		{
-			this.SendPropertyChanging();
-			entity.Customer = this;
-		}
-		
-		private void detach_CustomerFriends(CustomerFriend entity)
-		{
-			this.SendPropertyChanging();
-			entity.Customer = null;
-		}
-		
 		private void attach_CustomerFriends1(CustomerFriend entity)
 		{
 			this.SendPropertyChanging();
@@ -7237,6 +6898,300 @@ namespace YatesMorrison.SiteSmith.Data
 		{
 			this.SendPropertyChanging();
 			entity.Customer = null;
+		}
+	}
+	
+	[Table(Name="dbo.Contact")]
+	public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _ContactId;
+		
+		private string _FirstName;
+		
+		private string _LastName;
+		
+		private string _Title;
+		
+		private string _Company;
+		
+		private string _EmailAddress;
+		
+		private EntitySet<Address> _Addresses;
+		
+		private EntitySet<Manufacturer> _Manufacturers;
+		
+		private EntitySet<Phone> _Phones;
+		
+		private EntitySet<Customer> _Customers;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnContactIdChanging(System.Guid value);
+    partial void OnContactIdChanged();
+    partial void OnFirstNameChanging(string value);
+    partial void OnFirstNameChanged();
+    partial void OnLastNameChanging(string value);
+    partial void OnLastNameChanged();
+    partial void OnTitleChanging(string value);
+    partial void OnTitleChanged();
+    partial void OnCompanyChanging(string value);
+    partial void OnCompanyChanged();
+    partial void OnEmailAddressChanging(string value);
+    partial void OnEmailAddressChanged();
+    #endregion
+		
+		public Contact()
+		{
+			this._Addresses = new EntitySet<Address>(new Action<Address>(this.attach_Addresses), new Action<Address>(this.detach_Addresses));
+			this._Manufacturers = new EntitySet<Manufacturer>(new Action<Manufacturer>(this.attach_Manufacturers), new Action<Manufacturer>(this.detach_Manufacturers));
+			this._Phones = new EntitySet<Phone>(new Action<Phone>(this.attach_Phones), new Action<Phone>(this.detach_Phones));
+			this._Customers = new EntitySet<Customer>(new Action<Customer>(this.attach_Customers), new Action<Customer>(this.detach_Customers));
+			OnCreated();
+		}
+		
+		[Column(Storage="_ContactId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid ContactId
+		{
+			get
+			{
+				return this._ContactId;
+			}
+			set
+			{
+				if ((this._ContactId != value))
+				{
+					this.OnContactIdChanging(value);
+					this.SendPropertyChanging();
+					this._ContactId = value;
+					this.SendPropertyChanged("ContactId");
+					this.OnContactIdChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FirstName", DbType="NVarChar(MAX)")]
+		public string FirstName
+		{
+			get
+			{
+				return this._FirstName;
+			}
+			set
+			{
+				if ((this._FirstName != value))
+				{
+					this.OnFirstNameChanging(value);
+					this.SendPropertyChanging();
+					this._FirstName = value;
+					this.SendPropertyChanged("FirstName");
+					this.OnFirstNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_LastName", DbType="NVarChar(MAX)")]
+		public string LastName
+		{
+			get
+			{
+				return this._LastName;
+			}
+			set
+			{
+				if ((this._LastName != value))
+				{
+					this.OnLastNameChanging(value);
+					this.SendPropertyChanging();
+					this._LastName = value;
+					this.SendPropertyChanged("LastName");
+					this.OnLastNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Title", DbType="NVarChar(MAX)")]
+		public string Title
+		{
+			get
+			{
+				return this._Title;
+			}
+			set
+			{
+				if ((this._Title != value))
+				{
+					this.OnTitleChanging(value);
+					this.SendPropertyChanging();
+					this._Title = value;
+					this.SendPropertyChanged("Title");
+					this.OnTitleChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Company", DbType="NVarChar(MAX)")]
+		public string Company
+		{
+			get
+			{
+				return this._Company;
+			}
+			set
+			{
+				if ((this._Company != value))
+				{
+					this.OnCompanyChanging(value);
+					this.SendPropertyChanging();
+					this._Company = value;
+					this.SendPropertyChanged("Company");
+					this.OnCompanyChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_EmailAddress", DbType="NVarChar(MAX)")]
+		public string EmailAddress
+		{
+			get
+			{
+				return this._EmailAddress;
+			}
+			set
+			{
+				if ((this._EmailAddress != value))
+				{
+					this.OnEmailAddressChanging(value);
+					this.SendPropertyChanging();
+					this._EmailAddress = value;
+					this.SendPropertyChanged("EmailAddress");
+					this.OnEmailAddressChanged();
+				}
+			}
+		}
+		
+		[Association(Name="Contact_Address", Storage="_Addresses", OtherKey="ContactIdFk")]
+		public EntitySet<Address> Addresses
+		{
+			get
+			{
+				return this._Addresses;
+			}
+			set
+			{
+				this._Addresses.Assign(value);
+			}
+		}
+		
+		[Association(Name="Contact_Manufacturer", Storage="_Manufacturers", OtherKey="ContactIdFk")]
+		public EntitySet<Manufacturer> Manufacturers
+		{
+			get
+			{
+				return this._Manufacturers;
+			}
+			set
+			{
+				this._Manufacturers.Assign(value);
+			}
+		}
+		
+		[Association(Name="Contact_Phone", Storage="_Phones", OtherKey="ContactIdFk")]
+		public EntitySet<Phone> Phones
+		{
+			get
+			{
+				return this._Phones;
+			}
+			set
+			{
+				this._Phones.Assign(value);
+			}
+		}
+		
+		[Association(Name="Contact_Customer", Storage="_Customers", OtherKey="ContactIdFk")]
+		public EntitySet<Customer> Customers
+		{
+			get
+			{
+				return this._Customers;
+			}
+			set
+			{
+				this._Customers.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Addresses(Address entity)
+		{
+			this.SendPropertyChanging();
+			entity.Contact = this;
+		}
+		
+		private void detach_Addresses(Address entity)
+		{
+			this.SendPropertyChanging();
+			entity.Contact = null;
+		}
+		
+		private void attach_Manufacturers(Manufacturer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Contact = this;
+		}
+		
+		private void detach_Manufacturers(Manufacturer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Contact = null;
+		}
+		
+		private void attach_Phones(Phone entity)
+		{
+			this.SendPropertyChanging();
+			entity.Contact = this;
+		}
+		
+		private void detach_Phones(Phone entity)
+		{
+			this.SendPropertyChanging();
+			entity.Contact = null;
+		}
+		
+		private void attach_Customers(Customer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Contact = this;
+		}
+		
+		private void detach_Customers(Customer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Contact = null;
 		}
 	}
 }
