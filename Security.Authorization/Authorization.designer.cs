@@ -119,7 +119,11 @@ namespace YatesMorrison.Security.Authorization
 		
 		private string _Name;
 		
+		private EntitySet<Action> _Children;
+		
 		private EntitySet<Permission> _Permissions;
+		
+		private EntityRef<Action> _Parent;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -135,7 +139,9 @@ namespace YatesMorrison.Security.Authorization
 		
 		public Action()
 		{
+			this._Children = new EntitySet<Action>(new Action<Action>(this.attach_Children), new Action<Action>(this.detach_Children));
 			this._Permissions = new EntitySet<Permission>(new Action<Permission>(this.attach_Permissions), new Action<Permission>(this.detach_Permissions));
+			this._Parent = default(EntityRef<Action>);
 			OnCreated();
 		}
 		
@@ -170,6 +176,10 @@ namespace YatesMorrison.Security.Authorization
 			{
 				if ((this._ParentIdFk != value))
 				{
+					if (this._Parent.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnParentIdFkChanging(value);
 					this.SendPropertyChanging();
 					this._ParentIdFk = value;
@@ -199,6 +209,19 @@ namespace YatesMorrison.Security.Authorization
 			}
 		}
 		
+		[Association(Name="Action_Action", Storage="_Children", OtherKey="ParentIdFk")]
+		public EntitySet<Action> Children
+		{
+			get
+			{
+				return this._Children;
+			}
+			set
+			{
+				this._Children.Assign(value);
+			}
+		}
+		
 		[Association(Name="Action_Permission", Storage="_Permissions", OtherKey="ActionIdFk")]
 		public EntitySet<Permission> Permissions
 		{
@@ -209,6 +232,40 @@ namespace YatesMorrison.Security.Authorization
 			set
 			{
 				this._Permissions.Assign(value);
+			}
+		}
+		
+		[Association(Name="Action_Action", Storage="_Parent", ThisKey="ParentIdFk", IsForeignKey=true)]
+		public Action Parent
+		{
+			get
+			{
+				return this._Parent.Entity;
+			}
+			set
+			{
+				Action previousValue = this._Parent.Entity;
+				if (((previousValue != value) 
+							|| (this._Parent.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Parent.Entity = null;
+						previousValue.Children.Remove(this);
+					}
+					this._Parent.Entity = value;
+					if ((value != null))
+					{
+						value.Children.Add(this);
+						this._ParentIdFk = value.ActionId;
+					}
+					else
+					{
+						this._ParentIdFk = default(Nullable<System.Guid>);
+					}
+					this.SendPropertyChanged("Parent");
+				}
 			}
 		}
 		
@@ -230,6 +287,18 @@ namespace YatesMorrison.Security.Authorization
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Children(Action entity)
+		{
+			this.SendPropertyChanging();
+			entity.Parent = this;
+		}
+		
+		private void detach_Children(Action entity)
+		{
+			this.SendPropertyChanging();
+			entity.Parent = null;
 		}
 		
 		private void attach_Permissions(Permission entity)
@@ -257,7 +326,11 @@ namespace YatesMorrison.Security.Authorization
 		
 		private string _Name;
 		
+		private EntitySet<Securable> _Children;
+		
 		private EntitySet<Permission> _Permissions;
+		
+		private EntityRef<Securable> _Parent;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -273,7 +346,9 @@ namespace YatesMorrison.Security.Authorization
 		
 		public Securable()
 		{
+			this._Children = new EntitySet<Securable>(new Action<Securable>(this.attach_Children), new Action<Securable>(this.detach_Children));
 			this._Permissions = new EntitySet<Permission>(new Action<Permission>(this.attach_Permissions), new Action<Permission>(this.detach_Permissions));
+			this._Parent = default(EntityRef<Securable>);
 			OnCreated();
 		}
 		
@@ -308,6 +383,10 @@ namespace YatesMorrison.Security.Authorization
 			{
 				if ((this._ParentIdFk != value))
 				{
+					if (this._Parent.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnParentIdFkChanging(value);
 					this.SendPropertyChanging();
 					this._ParentIdFk = value;
@@ -337,6 +416,19 @@ namespace YatesMorrison.Security.Authorization
 			}
 		}
 		
+		[Association(Name="Securable_Securable", Storage="_Children", OtherKey="ParentIdFk")]
+		public EntitySet<Securable> Children
+		{
+			get
+			{
+				return this._Children;
+			}
+			set
+			{
+				this._Children.Assign(value);
+			}
+		}
+		
 		[Association(Name="Securable_Permission", Storage="_Permissions", OtherKey="SecurableIdFk")]
 		public EntitySet<Permission> Permissions
 		{
@@ -347,6 +439,40 @@ namespace YatesMorrison.Security.Authorization
 			set
 			{
 				this._Permissions.Assign(value);
+			}
+		}
+		
+		[Association(Name="Securable_Securable", Storage="_Parent", ThisKey="ParentIdFk", IsForeignKey=true)]
+		public Securable Parent
+		{
+			get
+			{
+				return this._Parent.Entity;
+			}
+			set
+			{
+				Securable previousValue = this._Parent.Entity;
+				if (((previousValue != value) 
+							|| (this._Parent.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Parent.Entity = null;
+						previousValue.Children.Remove(this);
+					}
+					this._Parent.Entity = value;
+					if ((value != null))
+					{
+						value.Children.Add(this);
+						this._ParentIdFk = value.SecurableId;
+					}
+					else
+					{
+						this._ParentIdFk = default(Nullable<System.Guid>);
+					}
+					this.SendPropertyChanged("Parent");
+				}
 			}
 		}
 		
@@ -368,6 +494,18 @@ namespace YatesMorrison.Security.Authorization
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Children(Securable entity)
+		{
+			this.SendPropertyChanging();
+			entity.Parent = this;
+		}
+		
+		private void detach_Children(Securable entity)
+		{
+			this.SendPropertyChanging();
+			entity.Parent = null;
 		}
 		
 		private void attach_Permissions(Permission entity)
@@ -395,7 +533,11 @@ namespace YatesMorrison.Security.Authorization
 		
 		private string _UserIdentifier;
 		
+		private EntitySet<Actor> _Children;
+		
 		private EntitySet<Permission> _Permissions;
+		
+		private EntityRef<Actor> _Parent;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -411,7 +553,9 @@ namespace YatesMorrison.Security.Authorization
 		
 		public Actor()
 		{
+			this._Children = new EntitySet<Actor>(new Action<Actor>(this.attach_Children), new Action<Actor>(this.detach_Children));
 			this._Permissions = new EntitySet<Permission>(new Action<Permission>(this.attach_Permissions), new Action<Permission>(this.detach_Permissions));
+			this._Parent = default(EntityRef<Actor>);
 			OnCreated();
 		}
 		
@@ -446,6 +590,10 @@ namespace YatesMorrison.Security.Authorization
 			{
 				if ((this._ParentIdFk != value))
 				{
+					if (this._Parent.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnParentIdFkChanging(value);
 					this.SendPropertyChanging();
 					this._ParentIdFk = value;
@@ -475,6 +623,19 @@ namespace YatesMorrison.Security.Authorization
 			}
 		}
 		
+		[Association(Name="Actor_Actor", Storage="_Children", OtherKey="ParentIdFk")]
+		public EntitySet<Actor> Children
+		{
+			get
+			{
+				return this._Children;
+			}
+			set
+			{
+				this._Children.Assign(value);
+			}
+		}
+		
 		[Association(Name="Actor_Permission", Storage="_Permissions", OtherKey="ActorIdFk")]
 		public EntitySet<Permission> Permissions
 		{
@@ -485,6 +646,40 @@ namespace YatesMorrison.Security.Authorization
 			set
 			{
 				this._Permissions.Assign(value);
+			}
+		}
+		
+		[Association(Name="Actor_Actor", Storage="_Parent", ThisKey="ParentIdFk", IsForeignKey=true)]
+		public Actor Parent
+		{
+			get
+			{
+				return this._Parent.Entity;
+			}
+			set
+			{
+				Actor previousValue = this._Parent.Entity;
+				if (((previousValue != value) 
+							|| (this._Parent.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Parent.Entity = null;
+						previousValue.Children.Remove(this);
+					}
+					this._Parent.Entity = value;
+					if ((value != null))
+					{
+						value.Children.Add(this);
+						this._ParentIdFk = value.ActorId;
+					}
+					else
+					{
+						this._ParentIdFk = default(Nullable<System.Guid>);
+					}
+					this.SendPropertyChanged("Parent");
+				}
 			}
 		}
 		
@@ -506,6 +701,18 @@ namespace YatesMorrison.Security.Authorization
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Children(Actor entity)
+		{
+			this.SendPropertyChanging();
+			entity.Parent = this;
+		}
+		
+		private void detach_Children(Actor entity)
+		{
+			this.SendPropertyChanging();
+			entity.Parent = null;
 		}
 		
 		private void attach_Permissions(Permission entity)
