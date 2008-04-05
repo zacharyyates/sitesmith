@@ -1,0 +1,57 @@
+#summary Stuff to do
+
+= Introduction =
+
+Add your content here.
+
+
+= Details =
+
+1.	*Milestone (M0.1)*
+1.1.	Data
+1.1.1.	Build data model
+1.1.2.	Create Linq Project
+1.1.3.	Create some unit tests
+1.2.	User Interface
+1.2.1.	Create master page
+1.2.2.	Create BasePage class
+1.2.3.	Create css style
+1.2.4.	Add user login widgets
+1.2.5.	Create home page
+1.2.6.	Create navigation bar(s)
+1.3.	Design Security Model
+1.3.1.	Create Db Model
+1.3.2.	Add to DataContext
+1.3.3.	Implement in SiteSmith.Web
+2.	*Milestone (M0.2)*
+2.1.	Services
+2.1.1.	Create services to encapsulate business logic
+2.1.2.	Create unit tests for services
+2.2.	Administration
+2.2.1.	Create administration pages
+2.2.1.1.	Products
+2.2.1.2.	Media
+2.2.1.2.1.	Media Upload
+2.2.1.2.2.	Resizer
+2.2.1.2.3.	Media Viewer/Searcher
+2.2.1.3.	Users
+2.2.1.4.	Feedback
+2.2.2.	Wire up administration pages
+2.3.	Cart
+2.3.1.	Service
+2.3.2.	Create page
+2.4.	Navigation
+2.4.1.	Round out navigation
+3.	*Milestone (M0.3)*
+3.1.	Orders
+3.1.1.	Build order flow
+3.1.2.	Write shipment logic
+3.1.3.	Wire in payment processor
+3.1.4.	Create unit tests
+3.2.	User Interface
+3.2.1.	Finalize Style
+3.2.2.	Create any static pages necessary
+4.	*Release (R1)*
+4.1.	Testing
+4.1.1.	Unit tests for 75% coverage
+4.1.2.	Use case walkthroughs
