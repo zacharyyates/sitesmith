@@ -90,14 +90,12 @@
     <Compile Include="FCF.master.designer.cs">
       <DependentUpon>FCF.master</DependentUpon>
     </Compile>
-	  <Compile Include="Home.aspx.cs">
-		  <DependentUpon>Home.aspx</DependentUpon>
-	  </Compile>
+    <Compile Include="Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Include\Image.ashx.cs">
       <DependentUpon>Image.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="Main.Master.cs">
-      <DependentUpon>Main.Master</DependentUpon>
     </Compile>
     <Compile Include="Main.Master.cs">
       <DependentUpon>Main.Master</DependentUpon>
