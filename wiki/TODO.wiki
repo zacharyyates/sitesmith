@@ -44,7 +44,7 @@
 3.2.	User Interface
 3.2.1.	Finalize Style
 3.2.2.	Create any static pages necessary
-4.	*Release (R1.0)*
+4.	*Release (RC1.0)*
 4.1.	Testing
 4.1.1.	Unit tests for 75% coverage
 4.1.2.	Use case walkthroughs
