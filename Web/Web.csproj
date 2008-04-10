@@ -94,20 +94,18 @@
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ImageTest.aspx.cs">
+      <DependentUpon>ImageTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ImageTest.aspx.designer.cs">
+      <DependentUpon>ImageTest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Include\Image.ashx.cs">
       <DependentUpon>Image.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Main.Master.cs">
-      <DependentUpon>Main.Master</DependentUpon>
-    </Compile>
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Product.Master.cs">
-      <DependentUpon>Product.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Product.Master.designer.cs">
-      <DependentUpon>Product.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -134,12 +132,18 @@
     <Content Include="Default.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ImageTest.aspx" />
     <Content Include="Include\Image.ashx" />
+    <Content Include="Media\Original\bff2149b-21e7-411b-9ff0-d3c7169652eb.GIF" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data\Data.csproj">
       <Project>{22BE9A03-DD56-4A43-8D60-C064A9B65F8C}</Project>
       <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service\Service.csproj">
+      <Project>{8FD20F49-477C-410B-9D5B-BCD42F6473BA}</Project>
+      <Name>Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

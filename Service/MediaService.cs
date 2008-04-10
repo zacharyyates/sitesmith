@@ -55,9 +55,9 @@ namespace YatesMorrison.SiteSmith.Service
 
 		void EnsureFolder(string path)
 		{
-			if (!Directory.Exists(path))
+			if (!Directory.Exists(Path.GetDirectoryName(path)))
 			{
-				Directory.CreateDirectory(path);
+				Directory.CreateDirectory(Path.GetDirectoryName(path));
 			}
 		}
 
@@ -83,12 +83,12 @@ namespace YatesMorrison.SiteSmith.Service
 						targetGraphics.DrawImage(targetImage,
 							new Rectangle(new Point(0, 0), targetSize), 0, 0, originalImage.Width, originalImage.Height, GraphicsUnit.Pixel);
 						// Save the image to the targetPath
-						using (FileStream targetStream = new FileStream(targetPath,FileMode.Create))
+						EnsureFolder(targetPath);
+						using (FileStream targetStream = new FileStream(targetPath, FileMode.Create))
 						{
 							targetBitmap.Save(targetStream, GetFormatFromExtension(Path.GetExtension(targetPath)));
 						}
 					}
-
 				}
 			}
 		}
@@ -97,11 +97,11 @@ namespace YatesMorrison.SiteSmith.Service
 		{
 			switch (extension.ToLowerInvariant())
 			{
-				case "bmp": return ImageFormat.Bmp;
-				case "jpg":
-				case "jpeg": return ImageFormat.Jpeg;
-				case "png": return ImageFormat.Png;
-				case "gif": return ImageFormat.Gif;
+				case ".bmp": return ImageFormat.Bmp;
+				case ".jpg":
+				case ".jpeg": return ImageFormat.Jpeg;
+				case ".png": return ImageFormat.Png;
+				case ".gif": return ImageFormat.Gif;
 				default: throw new InvalidOperationException(extension + " is not a supported format");
 			}
 		}
@@ -111,11 +111,11 @@ namespace YatesMorrison.SiteSmith.Service
 			float multiplier;
 			if (originalHeight > originalWidth)
 			{
-				multiplier = targetHeight / originalHeight;
+				multiplier = (float)targetHeight / (float)originalHeight;
 			}
 			else
 			{
-				multiplier = targetWidth / originalWidth;
+				multiplier = (float)targetWidth / (float)originalWidth;
 			}
 			return new Size((int)(multiplier * originalWidth), (int)(multiplier * originalHeight));
 		}
