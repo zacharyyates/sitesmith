@@ -1,0 +1,10 @@
+#summary System.Data.Linq.DataContext
+
+= Introduction =
+
+A LINQ to SQL DataContext is the generated class that allows us to work with a database.
+
+
+= Details =
+
+See http://msdn.microsoft.com/en-us/library/system.data.linq.datacontext.aspx
