@@ -6,6 +6,7 @@
  */
 
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Security;
@@ -40,7 +41,8 @@ namespace YatesMorrison.SiteSmith.Service
 
 	public interface ITranslationService
 	{
-		string Translate( TranslationMode mode, string text );
+		string Translate( string fromLanguage, string toLangugage, string text );
+		bool CanTranslate( string fromLanguage, string toLanguage );
 	}
 
 	public class BabelFishTranslationService : ITranslationService
@@ -49,6 +51,44 @@ namespace YatesMorrison.SiteSmith.Service
 		const string BABELFISHREFERER = "http://babelfish.yahoo.com/";
 		const string REGEXMATCH = @"<div id=\""result\""><div style=\""padding:0.6em;\"">((?:.|\n)*?)</div></div>";
 
+		public bool CanTranslate( string fromLanguage, string toLanguage )
+		{
+			try
+			{
+				GetTranslationMode(fromLanguage, toLanguage);
+				return true;
+			}
+			catch (Exception ex)
+			{
+				Trace.TraceWarning("TranslationMode is not supported.", ex);
+				return false;
+			}
+		}
+		static TranslationMode GetTranslationMode( string fromLanguage, string toLanguage )
+		{
+			string mode = string.Empty;
+			try
+			{
+				mode = fromLanguage.Substring(0, 2) + "_" + toLanguage.Substring(0, 2);
+				return (TranslationMode)Enum.Parse(typeof(TranslationMode), mode);
+			}
+			catch (Exception ex)
+			{
+				throw new InvalidOperationException("TranslationMode is not supported: " + mode, ex);
+			}
+		}
+
+		public string Translate( string fromLanguage, string toLangugage, string text )
+		{
+			if (CanTranslate(fromLanguage, toLangugage))
+			{
+				return Translate(GetTranslationMode(fromLanguage, toLangugage), text);
+			}
+			else
+			{
+				return text;
+			}
+		}
 		public string Translate( TranslationMode mode, string text )
 		{
 			try

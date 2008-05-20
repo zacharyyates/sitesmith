@@ -8,6 +8,8 @@ using System.Linq;
 using System.Threading;
 
 using YatesMorrison.SiteSmith.Data;
+using System.Configuration;
+using System.Collections.Generic;
 
 namespace YatesMorrison.SiteSmith.Service
 {
@@ -17,7 +19,7 @@ namespace YatesMorrison.SiteSmith.Service
 	{
 		public static string GetSetting( string name )
 		{
-			return GetSetting(name, Thread.CurrentThread.CurrentUICulture.IetfLanguageTag);
+			return GetSetting(name, Thread.CurrentThread.CurrentUICulture.Name);
 		}
 		public static string GetSetting( string name, string language )
 		{
@@ -33,6 +35,25 @@ namespace YatesMorrison.SiteSmith.Service
 				}
 				else // TODO: throwing an exception may be a little extreme. Maybe change it to a trace log error
 				{
+					if (Convert.ToBoolean(ConfigurationManager.AppSettings["AutoTranslate"]))
+					{
+						// TODO: Abstract this to use the ITranslationService interface
+						BabelFishTranslationService translator = new BabelFishTranslationService();
+						
+						foreach (Setting s in context.Settings.Where(s =>
+												s.Name.ToLower() == name.ToLower()))
+						{
+							// Translate the first entry that can be translated
+							if (translator.CanTranslate(s.Language, language) && 
+								s.AutoTranslate.HasValue &&
+								s.AutoTranslate.Value == true)
+							{
+								return translator.Translate(s.Language, language, s.Value);
+							}
+						}
+						// Else, fall through and throw the exception
+					}
+
 					throw new InvalidOperationException(
 						string.Format("Setting {0} for language {1} not found.", name, language));
 				}
