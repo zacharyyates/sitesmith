@@ -31,7 +31,6 @@ namespace YatesMorrison.SiteSmith.Service
 			fsData.Write(data, 0, data.Length);
 
 			// Save the record
-
 			using (SiteSmithDataContext context = new SiteSmithDataContext())
 			{
 				Media media = new Media
@@ -108,15 +107,10 @@ namespace YatesMorrison.SiteSmith.Service
 
 		static Size GetSizeKeepAspect(int originalWidth, int originalHeight, int targetWidth, int targetHeight)
 		{
-			float multiplier;
-			if (originalHeight > originalWidth)
-			{
-				multiplier = (float)targetHeight / (float)originalHeight;
-			}
-			else
-			{
-				multiplier = (float)targetWidth / (float)originalWidth;
-			}
+			float multiplier = (originalHeight > originalWidth) ? 
+				(float)targetHeight / (float)originalHeight :
+				(float)targetWidth / (float)originalWidth;
+			
 			return new Size((int)(multiplier * originalWidth), (int)(multiplier * originalHeight));
 		}
 	}
