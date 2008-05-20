@@ -3,19 +3,19 @@
 
  #.	*Milestone (M0.1)*
   #.	Data
-   #.	Build data model
-   #.	Create Linq Project
+   #.	~~Build data model~~
+   #.	~~Create Linq Project~~
    #.	Create some unit tests
   #.	User Interface
-   #.	Create master page
-   #.	Create BasePage class
-   #.	Create css style
+   #.	~~Create master page~~
+   #.	~~Create BasePage class~~
+   #.	~~Create css style~~
    #.	Add user login widgets
-   #.	Create home page
+   #.	~~Create home page~~
    #.	Create navigation bar(s)
   #.	Design Security Model
-   #.	Create Db Model
-   #.	Add to DataContext
+   #.	~~Create Db Model~~
+   #.	~~Add to DataContext~~
    #.	Implement in SiteSmith.Web
  #.	*Milestone (M0.2)*
   #.	Services
@@ -26,7 +26,7 @@
     #.	Products
     #.	Media
      #.	Media Upload
-     #.	Resizer
+     #.	~~Resizer~~
      #.	Media Viewer/Searcher
     #.	Users
     #.	Feedback
