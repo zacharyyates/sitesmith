@@ -11,7 +11,7 @@
 namespace YatesMorrison.SiteSmith.Web {
     
     
-    public partial class Home {
+    public partial class Default {
         
         /// <summary>
         /// gvArticles control.

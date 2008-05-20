@@ -1,22 +1,11 @@
 ﻿using System;
-using System.Collections;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Xml.Linq;
-using System.Collections.Generic;
 
 namespace YatesMorrison.SiteSmith.Web
 {
-	public partial class FCF : System.Web.UI.MasterPage
+	public partial class FCF : MasterPage
 	{
-        protected string[] departments = { "Firearms", "Ammunition", "Airsoft", "Tactical Gear" };
+        protected string[] departments = { "Firearms", "Ammunition", "Airsoft", "Paintball", "Tactical Gear" };
 
 		protected void Page_Load(object sender, EventArgs e)
 		{

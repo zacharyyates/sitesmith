@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/FCF.master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="YatesMorrison.SiteSmith.Web.Home" Title="Frederick County Firearms: Home" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/FCF.master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="YatesMorrison.SiteSmith.Web.Default" Title="Frederick County Firearms: Home" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphMainContentCenter" runat="server">
     <asp:GridView ID="gvArticles" runat="server" AutoGenerateColumns="false" GridLines="None">
