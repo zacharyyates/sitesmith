@@ -7170,6 +7170,8 @@ namespace YatesMorrison.SiteSmith.Data
 		
 		private string _Value;
 		
+		private System.Nullable<bool> _AutoTranslate;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -7180,6 +7182,8 @@ namespace YatesMorrison.SiteSmith.Data
     partial void OnLanguageChanged();
     partial void OnValueChanging(string value);
     partial void OnValueChanged();
+    partial void OnAutoTranslateChanging(System.Nullable<bool> value);
+    partial void OnAutoTranslateChanged();
     #endregion
 		
 		public Setting()
@@ -7243,6 +7247,26 @@ namespace YatesMorrison.SiteSmith.Data
 					this._Value = value;
 					this.SendPropertyChanged("Value");
 					this.OnValueChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_AutoTranslate", DbType="Bit")]
+		public System.Nullable<bool> AutoTranslate
+		{
+			get
+			{
+				return this._AutoTranslate;
+			}
+			set
+			{
+				if ((this._AutoTranslate != value))
+				{
+					this.OnAutoTranslateChanging(value);
+					this.SendPropertyChanging();
+					this._AutoTranslate = value;
+					this.SendPropertyChanged("AutoTranslate");
+					this.OnAutoTranslateChanged();
 				}
 			}
 		}

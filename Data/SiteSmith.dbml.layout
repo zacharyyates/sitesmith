@@ -394,10 +394,10 @@
         <classShapeMoniker Id="5b8547cb-2c3f-496b-b430-0db979e2eb3c" />
       </nodes>
     </associationConnector>
-    <classShape Id="b8a059d5-d244-4c52-a9a4-819bd7e02095" absoluteBounds="11.875, 4, 2, 1.26050048828125">
+    <classShape Id="b8a059d5-d244-4c52-a9a4-819bd7e02095" absoluteBounds="11.875, 4, 2, 1.4248478190104166">
       <DataClassMoniker Name="/SiteSmithDataContext/Setting" />
       <nestedChildShapes>
-        <elementListCompartment Id="3084fe7b-51e0-4fa7-817c-34e624b33e67" absoluteBounds="11.89, 4.46, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="3084fe7b-51e0-4fa7-817c-34e624b33e67" absoluteBounds="11.89, 4.46, 1.9700000000000002, 0.86484781901041663" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
