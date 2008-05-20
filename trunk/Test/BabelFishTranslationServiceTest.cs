@@ -17,8 +17,8 @@ namespace YatesMorrison.SiteSmith.Test
 		public TestContext TestContext { get; set; }
 
 		/// <summary>
-		///A test for Translate
-		///</summary>
+		/// A test for Translate
+		/// </summary>
 		[TestMethod()]
 		public void TranslateTest()
 		{

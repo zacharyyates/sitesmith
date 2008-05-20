@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="SiteSmith.Application" Class="SiteSmithDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=COMPUTRONIX\YMS;Initial Catalog=SiteSmith.Application;Integrated Security=True" SettingsObjectName="YatesMorrison.SiteSmith.Data.Properties.Settings" SettingsPropertyName="SiteSmith_ApplicationConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=glddit12849\sqlexpress;Initial Catalog=SiteSmith.Application;Integrated Security=True" SettingsObjectName="YatesMorrison.SiteSmith.Data.Properties.Settings" SettingsPropertyName="SiteSmith_ApplicationConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Account" Member="Accounts">
     <Type Name="Account">
       <Column Name="AccountId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -321,6 +321,13 @@
       <Column Name="Height" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="FileExtension" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="Media_ProductMedia" Member="ProductMedias" OtherKey="MediaIdFk" Type="ProductMedia" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Setting" Member="Settings">
+    <Type Name="Setting">
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Language" Storage="_Culture" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Value" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

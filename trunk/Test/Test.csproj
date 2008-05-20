@@ -55,6 +55,7 @@
     <Compile Include="BabelFishTranslationServiceTest.cs" />
     <Compile Include="CustomerServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AuthoringTests.txt" />
