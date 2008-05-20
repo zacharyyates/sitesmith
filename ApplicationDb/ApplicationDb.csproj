@@ -52,4 +52,9 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <None Include="Custom Scripts\SS2K8_Application_CreateSql.sql" />
+    <None Include="Custom Scripts\SS2K8_Authentication_CreateSql.sql" />
+    <None Include="Custom Scripts\SS2K8_Authorization_CreateSql.sql" />
+  </ItemGroup>
 </Project>

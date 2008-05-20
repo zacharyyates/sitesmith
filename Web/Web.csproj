@@ -94,13 +94,6 @@
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ImageTest.aspx.cs">
-      <DependentUpon>ImageTest.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ImageTest.aspx.designer.cs">
-      <DependentUpon>ImageTest.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Include\Image.ashx.cs">
       <DependentUpon>Image.ashx</DependentUpon>
     </Compile>
@@ -132,7 +125,6 @@
     <Content Include="Default.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ImageTest.aspx" />
     <Content Include="Include\Image.ashx" />
     <Content Include="Media\Original\bff2149b-21e7-411b-9ff0-d3c7169652eb.GIF" />
   </ItemGroup>
