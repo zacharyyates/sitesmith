@@ -7,6 +7,9 @@ using System.Web.UI;
 
 namespace YatesMorrison.SiteSmith.Web
 {
+	/// <summary>
+	/// The base class for any SiteSmith page
+	/// </summary>
 	public class BasePage : Page
 	{
 		// TODO: Add any cross-page methods/properties here
