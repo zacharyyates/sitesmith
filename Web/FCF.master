@@ -81,10 +81,8 @@
                 </ul>
             </div>
             <div class="bottomcolumn bottomright">
-                <h3>
-                    Stay In Touch</h3>
-                <p>
-                    <asp:Label ID="lNewsletterText" runat="server"></asp:Label></p>
+                <h3>Stay In Touch</h3>
+                <p><asp:Label ID="lNewsletterText" runat="server"></asp:Label></p>
                 <asp:TextBox ID="tbEmail" runat="server" CssClass="enewsbox"></asp:TextBox>
                 <asp:Button ID="bSubmit" runat="server" Text="Submit" CssClass="button" />
             </div>

@@ -33,14 +33,26 @@
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BabelFishTranslationServiceTest.cs" />
     <Compile Include="CustomerServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -51,6 +63,14 @@
     <ProjectReference Include="..\Data\Data.csproj">
       <Project>{22BE9A03-DD56-4A43-8D60-C064A9B65F8C}</Project>
       <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Security.Authentication\Security.Authentication.csproj">
+      <Project>{46C2D1F9-B9BE-4F37-9EA7-4E422F977251}</Project>
+      <Name>Security.Authentication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Security.Authorization\Security.Authorization.csproj">
+      <Project>{BCF6C7B9-9752-4FA6-916C-60778BCD432E}</Project>
+      <Name>Security.Authorization</Name>
     </ProjectReference>
     <ProjectReference Include="..\Service\Service.csproj">
       <Project>{8FD20F49-477C-410B-9D5B-BCD42F6473BA}</Project>
