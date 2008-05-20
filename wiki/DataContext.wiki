@@ -7,4 +7,4 @@ A LINQ to SQL DataContext is the generated class that allows us to work with a d
 
 = Details =
 
-See http://msdn.microsoft.com/en-us/library/system.data.linq.datacontext.aspx
+See [http://msdn.microsoft.com/en-us/library/system.data.linq.datacontext.aspx DataContext Class (System.Data.Linq)]
