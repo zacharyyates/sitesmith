@@ -1,0 +1,5 @@
+#summary The base namespace for all YatesMorrison Software, LLC. code.
+
+= Introduction =
+
+All YatesMorrison projects share this base namespace.
