@@ -32,15 +32,18 @@
     <div id="main" class="container">
         <!--Left Column-->
         <div id="leftcolumn">
-            <h3 class="leftbox">
-                Departments</h3>
-            <ul class="leftbox borderedlist">
-                <%foreach (string department in departments)
-                  {%>
-                <li><a href="#" title="<%=department%>">
-                    <%=department%></a></li>
-                <%} %>
-            </ul>
+            <h3 class="leftbox">Departments</h3>
+            <asp:ListView ID="lvDepartments" runat="server">
+				<LayoutTemplate>
+					<ul class="leftbox borderedlist">
+						<asp:PlaceHolder ID="itemPlaceholder" runat="server" />
+					</ul>
+				</LayoutTemplate>
+				<ItemTemplate>
+					<li><asp:HyperLink runat="server" Text='<%# Eval("Name") %>' NavigateUrl='<%# "~/Department.aspx?id=" + Eval("DepartmentId") %>'></asp:HyperLink></li>
+				</ItemTemplate>
+            </asp:ListView>
+            
             <h3 class="leftbox header_small">
                 Spotlight</h3>
             <div class="leftbox features">

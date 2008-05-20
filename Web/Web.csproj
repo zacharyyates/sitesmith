@@ -59,9 +59,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasePage.cs">
+    <Compile Include="Core\BaseMasterPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Core\BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Core\PageExtensions.cs" />
     <Compile Include="FCF.master.cs">
       <DependentUpon>FCF.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

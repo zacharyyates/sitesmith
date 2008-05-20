@@ -33,5 +33,16 @@ namespace YatesMorrison.SiteSmith.Data.Properties {
                 return ((string)(this["SiteSmith_ApplicationConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=glddit12849\\sqlexpress;Initial Catalog=SiteSmith.Application;Integrat" +
+            "ed Security=True")]
+        public string SiteSmith_ApplicationConnectionString1 {
+            get {
+                return ((string)(this["SiteSmith_ApplicationConnectionString1"]));
+            }
+        }
     }
 }

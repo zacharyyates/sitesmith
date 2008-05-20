@@ -114,10 +114,13 @@ namespace YatesMorrison.SiteSmith.Data
     partial void InsertMedia(Media instance);
     partial void UpdateMedia(Media instance);
     partial void DeleteMedia(Media instance);
+    partial void InsertSetting(Setting instance);
+    partial void UpdateSetting(Setting instance);
+    partial void DeleteSetting(Setting instance);
     #endregion
 		
 		public SiteSmithDataContext() : 
-				base(global::YatesMorrison.SiteSmith.Data.Properties.Settings.Default.SiteSmith_ApplicationConnectionString, mappingSource)
+				base(global::YatesMorrison.SiteSmith.Data.Properties.Settings.Default.SiteSmith_ApplicationConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -367,6 +370,14 @@ namespace YatesMorrison.SiteSmith.Data
 			get
 			{
 				return this.GetTable<Media>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Setting> Settings
+		{
+			get
+			{
+				return this.GetTable<Setting>();
 			}
 		}
 	}
@@ -7144,6 +7155,116 @@ namespace YatesMorrison.SiteSmith.Data
 		{
 			this.SendPropertyChanging();
 			entity.Media = null;
+		}
+	}
+	
+	[Table(Name="dbo.Setting")]
+	public partial class Setting : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Name;
+		
+		private string _Culture;
+		
+		private string _Value;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnLanguageChanging(string value);
+    partial void OnLanguageChanged();
+    partial void OnValueChanging(string value);
+    partial void OnValueChanged();
+    #endregion
+		
+		public Setting()
+		{
+			OnCreated();
+		}
+		
+		[Column(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Culture", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Language
+		{
+			get
+			{
+				return this._Culture;
+			}
+			set
+			{
+				if ((this._Culture != value))
+				{
+					this.OnLanguageChanging(value);
+					this.SendPropertyChanging();
+					this._Culture = value;
+					this.SendPropertyChanged("Language");
+					this.OnLanguageChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Value", DbType="NVarChar(MAX)")]
+		public string Value
+		{
+			get
+			{
+				return this._Value;
+			}
+			set
+			{
+				if ((this._Value != value))
+				{
+					this.OnValueChanging(value);
+					this.SendPropertyChanging();
+					this._Value = value;
+					this.SendPropertyChanged("Value");
+					this.OnValueChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }
