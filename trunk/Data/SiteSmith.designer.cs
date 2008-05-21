@@ -6840,7 +6840,7 @@ namespace YatesMorrison.SiteSmith.Data
 		
 		private string _Path;
 		
-		private System.Nullable<byte> _Type;
+		private MediaType _Type;
 		
 		private System.Nullable<int> _Size;
 		
@@ -6854,7 +6854,7 @@ namespace YatesMorrison.SiteSmith.Data
 		
 		private System.Nullable<int> _Height;
 		
-		private string _FileExtension;
+		private string _Extension;
 		
 		private EntitySet<ProductMedia> _ProductMedias;
 		
@@ -6868,7 +6868,7 @@ namespace YatesMorrison.SiteSmith.Data
     partial void OnNameChanged();
     partial void OnPathChanging(string value);
     partial void OnPathChanged();
-    partial void OnTypeChanging(System.Nullable<byte> value);
+    partial void OnTypeChanging(MediaType value);
     partial void OnTypeChanged();
     partial void OnSizeChanging(System.Nullable<int> value);
     partial void OnSizeChanged();
@@ -6882,8 +6882,8 @@ namespace YatesMorrison.SiteSmith.Data
     partial void OnWidthChanged();
     partial void OnHeightChanging(System.Nullable<int> value);
     partial void OnHeightChanged();
-    partial void OnFileExtensionChanging(string value);
-    partial void OnFileExtensionChanged();
+    partial void OnExtensionChanging(string value);
+    partial void OnExtensionChanged();
     #endregion
 		
 		public Media()
@@ -6952,8 +6952,8 @@ namespace YatesMorrison.SiteSmith.Data
 			}
 		}
 		
-		[Column(Storage="_Type", DbType="TinyInt")]
-		public System.Nullable<byte> Type
+		[Column(Storage="_Type", DbType="Int", CanBeNull=true)]
+		public MediaType Type
 		{
 			get
 			{
@@ -7092,22 +7092,22 @@ namespace YatesMorrison.SiteSmith.Data
 			}
 		}
 		
-		[Column(Storage="_FileExtension", DbType="NVarChar(50)")]
-		public string FileExtension
+		[Column(Storage="_Extension", DbType="VarChar(50)", CanBeNull=false)]
+		public string Extension
 		{
 			get
 			{
-				return this._FileExtension;
+				return this._Extension;
 			}
 			set
 			{
-				if ((this._FileExtension != value))
+				if ((this._Extension != value))
 				{
-					this.OnFileExtensionChanging(value);
+					this.OnExtensionChanging(value);
 					this.SendPropertyChanging();
-					this._FileExtension = value;
-					this.SendPropertyChanged("FileExtension");
-					this.OnFileExtensionChanged();
+					this._Extension = value;
+					this.SendPropertyChanged("Extension");
+					this.OnExtensionChanged();
 				}
 			}
 		}

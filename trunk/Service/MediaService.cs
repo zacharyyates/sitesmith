@@ -23,8 +23,8 @@ namespace YatesMorrison.SiteSmith.Service
 		{
 			// Write the file
 			Guid mediaId = Guid.NewGuid();
-			string path = ConfigurationManager.AppSettings["MediaPath"];
-			path = path + @"\Originals\" + mediaId + Path.GetExtension(fileName);
+			string path = ConfigurationManager.AppSettings["MediaPath"] +
+				@"\Originals\" + mediaId + Path.GetExtension(fileName);
 			
 			EnsureFolder(Path.GetDirectoryName(path));
 			FileStream fsData = new FileStream(path, FileMode.Create);
@@ -39,7 +39,7 @@ namespace YatesMorrison.SiteSmith.Service
 					Size = data.Length,
 					Name = Path.GetFileNameWithoutExtension(fileName),
 					Path = path,
-					FileExtension = Path.GetExtension(path).Replace(".", ""),
+					Extension = Path.GetExtension(path).Replace(".", ""),
 					Created = DateTime.UtcNow,
 					Modified = DateTime.UtcNow
 					// TODO: Add height width calculation?

@@ -381,13 +381,13 @@
         <classShapeMoniker Id="021a2a85-f7f9-44ce-8207-e165aceac96e" />
       </nodes>
     </associationConnector>
-    <classShape Id="b239b980-b101-49fe-a2cd-ea30df6f1ae2" absoluteBounds="6, 1.375, 2, 2.5752791341145831">
+    <classShape Id="b239b980-b101-49fe-a2cd-ea30df6f1ae2" absoluteBounds="6, 1.125, 2, 2.5752791341145831">
       <DataClassMoniker Name="/SiteSmithDataContext/Media" />
       <nestedChildShapes>
-        <elementListCompartment Id="c2e4427e-4213-4f92-8255-e368ac479341" absoluteBounds="6.015, 1.835, 1.9700000000000002, 2.015279134114583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="c2e4427e-4213-4f92-8255-e368ac479341" absoluteBounds="6.015, 1.585, 1.9700000000000002, 2.015279134114583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(7 : 3.95027913411458); (7 : 4.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(7 : 3.70027913411458); (7 : 4.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/SiteSmithDataContext/Media/Media_ProductMedia" />
       <nodes>
         <classShapeMoniker Id="b239b980-b101-49fe-a2cd-ea30df6f1ae2" />

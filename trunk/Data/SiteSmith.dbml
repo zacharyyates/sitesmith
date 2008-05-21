@@ -312,14 +312,14 @@
       <Column Name="MediaId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Path" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Type" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="Type" Type="MediaType" DbType="Int" CanBeNull="true" />
       <Column Name="Size" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Created" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Deleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Width" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Height" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="FileExtension" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Extension" Type="System.String" DbType="VarChar(50)" CanBeNull="false" />
       <Association Name="Media_ProductMedia" Member="ProductMedias" OtherKey="MediaIdFk" Type="ProductMedia" />
     </Type>
   </Table>

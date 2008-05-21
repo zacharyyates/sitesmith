@@ -21,7 +21,7 @@ namespace YatesMorrison.SiteSmith.Web
 	/// </summary>
 	[WebService(Namespace = "http://yatesmorrison.com/SiteSmith/ImageHandler")]
 	[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
-	public class Image : IHttpHandler
+	public class ImageHandler : IHttpHandler
 	{
 		public bool IsReusable { get { return true; } }
 
@@ -36,7 +36,7 @@ namespace YatesMorrison.SiteSmith.Web
 			using (SiteSmithDataContext dataContext = new SiteSmithDataContext())
 			{
 				var media = dataContext.Medias.Single(m => m.MediaId == mediaId);
-				fileExt = media.FileExtension;
+				fileExt = media.Extension;
 			}
 
 			// Build the correct file path
