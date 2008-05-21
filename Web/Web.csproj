@@ -59,6 +59,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ImageList.cs" />
     <Compile Include="Core\BaseMasterPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -77,13 +78,27 @@
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Include\Image.ashx.cs">
-      <DependentUpon>Image.ashx</DependentUpon>
+    <Compile Include="Include\ImageHandler.ashx.cs">
+      <DependentUpon>ImageHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ProductDetail.aspx.cs">
+      <DependentUpon>ProductDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductDetail.aspx.designer.cs">
+      <DependentUpon>ProductDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test\ImageList.aspx.cs">
+      <DependentUpon>ImageList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\ImageList.aspx.designer.cs">
+      <DependentUpon>ImageList.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="FCF.master" />
@@ -103,8 +118,10 @@
     <Content Include="Styles\reset-min.css" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Include\Image.ashx" />
+    <Content Include="Include\ImageHandler.ashx" />
     <Content Include="Media\Original\bff2149b-21e7-411b-9ff0-d3c7169652eb.GIF" />
+    <Content Include="ProductDetail.aspx" />
+    <Content Include="Test\ImageList.aspx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data\Data.csproj">

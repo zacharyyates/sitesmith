@@ -7,8 +7,14 @@ using System.Linq;
 
 namespace YatesMorrison.SiteSmith.Data
 {
+	public enum MediaType
+	{
+		Image = 0,
+		Video = 1
+	}
+
 	partial class SiteSmithDataContext
 	{
-
+		
 	}
 }
