@@ -4837,7 +4837,7 @@ namespace YatesMorrison.SiteSmith.Data
 			}
 		}
 		
-		[Association(Name="Tag_ProductTag", Storage="_Tag", ThisKey="TagIdFk", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		[Association(Name="Tag_ProductTag", Storage="_Tag", ThisKey="TagIdFk", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Tag Tag
 		{
 			get
@@ -4860,7 +4860,7 @@ namespace YatesMorrison.SiteSmith.Data
 					if ((value != null))
 					{
 						value.ProductTags.Add(this);
-						this._TagIdFk = value.TagId;
+						this._TagIdFk = value.Id;
 					}
 					else
 					{
@@ -5526,8 +5526,8 @@ namespace YatesMorrison.SiteSmith.Data
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnTagIdChanging(System.Guid value);
-    partial void OnTagIdChanged();
+    partial void OnIdChanging(System.Guid value);
+    partial void OnIdChanged();
     partial void OnNameChanging(string value);
     partial void OnNameChanged();
     #endregion
@@ -5538,8 +5538,8 @@ namespace YatesMorrison.SiteSmith.Data
 			OnCreated();
 		}
 		
-		[Column(Storage="_TagId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid TagId
+		[Column(Name="TagId", Storage="_TagId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid Id
 		{
 			get
 			{
@@ -5549,11 +5549,11 @@ namespace YatesMorrison.SiteSmith.Data
 			{
 				if ((this._TagId != value))
 				{
-					this.OnTagIdChanging(value);
+					this.OnIdChanging(value);
 					this.SendPropertyChanging();
 					this._TagId = value;
-					this.SendPropertyChanged("TagId");
-					this.OnTagIdChanged();
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
 				}
 			}
 		}
@@ -5578,7 +5578,7 @@ namespace YatesMorrison.SiteSmith.Data
 			}
 		}
 		
-		[Association(Name="Tag_ProductTag", Storage="_ProductTags", OtherKey="TagIdFk")]
+		[Association(Name="Tag_ProductTag", Storage="_ProductTags", ThisKey="Id", OtherKey="TagIdFk")]
 		public EntitySet<ProductTag> ProductTags
 		{
 			get

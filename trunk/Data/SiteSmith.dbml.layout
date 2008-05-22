@@ -387,7 +387,7 @@
         <elementListCompartment Id="c2e4427e-4213-4f92-8255-e368ac479341" absoluteBounds="6.015, 1.585, 1.9700000000000002, 2.015279134114583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(7 : 3.70027913411458); (7 : 4.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(7 : 3.70027913411458); (7 : 4.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/SiteSmithDataContext/Media/Media_ProductMedia" />
       <nodes>
         <classShapeMoniker Id="b239b980-b101-49fe-a2cd-ea30df6f1ae2" />
