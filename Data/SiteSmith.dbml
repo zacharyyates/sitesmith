@@ -212,7 +212,7 @@
       <Column Name="ProductIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="TagIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="Product_ProductTag" Member="Product" ThisKey="ProductIdFk" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="Tag_ProductTag" Member="Tag" ThisKey="TagIdFk" Type="Tag" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Tag_ProductTag" Member="Tag" ThisKey="TagIdFk" OtherKey="Id" Type="Tag" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Shipment" Member="Shipments">
@@ -247,9 +247,9 @@
   </Table>
   <Table Name="dbo.Tag" Member="Tags">
     <Type Name="Tag">
-      <Column Name="TagId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TagId" Member="Id" Storage="_TagId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Association Name="Tag_ProductTag" Member="ProductTags" OtherKey="TagIdFk" Type="ProductTag" />
+      <Association Name="Tag_ProductTag" Member="ProductTags" ThisKey="Id" OtherKey="TagIdFk" Type="ProductTag" />
     </Type>
   </Table>
   <Table Name="dbo.Vote" Member="Votes">

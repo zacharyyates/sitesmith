@@ -59,6 +59,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\Products\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Products\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Products\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Products\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ImageList.cs" />
     <Compile Include="Core\BaseMasterPage.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -118,6 +132,8 @@
     <Content Include="Styles\reset-min.css" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\Products\Default.aspx" />
+    <Content Include="Admin\Products\Edit.aspx" />
     <Content Include="Include\ImageHandler.ashx" />
     <Content Include="Media\Original\bff2149b-21e7-411b-9ff0-d3c7169652eb.GIF" />
     <Content Include="ProductDetail.aspx" />
@@ -132,9 +148,6 @@
       <Project>{8FD20F49-477C-410B-9D5B-BCD42F6473BA}</Project>
       <Name>Service</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Admin\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
