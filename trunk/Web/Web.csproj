@@ -73,6 +73,13 @@
     <Compile Include="Admin\Products\Edit.aspx.designer.cs">
       <DependentUpon>Edit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BlockProductDetailControl.ascx.cs">
+      <DependentUpon>BlockProductDetailControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\BlockProductDetailControl.ascx.designer.cs">
+      <DependentUpon>BlockProductDetailControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ImageList.cs" />
     <Compile Include="Core\BaseMasterPage.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -81,6 +88,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Core\PageExtensions.cs" />
+    <Compile Include="DualColumnProductDetail.aspx.cs">
+      <DependentUpon>DualColumnProductDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DualColumnProductDetail.aspx.designer.cs">
+      <DependentUpon>DualColumnProductDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FCF.master.cs">
       <DependentUpon>FCF.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -134,6 +148,8 @@
   <ItemGroup>
     <Content Include="Admin\Products\Default.aspx" />
     <Content Include="Admin\Products\Edit.aspx" />
+    <Content Include="Controls\BlockProductDetailControl.ascx" />
+    <Content Include="DualColumnProductDetail.aspx" />
     <Content Include="Include\ImageHandler.ashx" />
     <Content Include="Media\Original\bff2149b-21e7-411b-9ff0-d3c7169652eb.GIF" />
     <Content Include="ProductDetail.aspx" />
