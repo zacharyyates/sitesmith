@@ -120,7 +120,7 @@ namespace YatesMorrison.SiteSmith.Data
     #endregion
 		
 		public SiteSmithDataContext() : 
-				base(global::YatesMorrison.SiteSmith.Data.Properties.Settings.Default.SiteSmith_ApplicationConnectionString1, mappingSource)
+				base(global::YatesMorrison.SiteSmith.Data.Properties.Settings.Default.SiteSmith_ApplicationConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}

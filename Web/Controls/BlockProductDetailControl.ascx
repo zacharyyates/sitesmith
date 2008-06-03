@@ -1,12 +1,18 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="BlockProductDetailControl.ascx.cs" Inherits="YatesMorrison.SiteSmith.Web.Controls.BlockProductControl" %>
 <%@ Register Namespace="YatesMorrison.SiteSmith.Web.Controls" Assembly="SiteSmith.Web" TagPrefix="SiteSmith" %>
 <div class="ProductBlock">
+	<div class="Name">
+		<asp:Label ID="lName" runat="server" />
+	</div>
 	<div class="LeftCol">
 		<div class="Image">
-			<asp:Image runat="server" ID="iMain" />
+			<asp:Image ID="iMain" runat="server" />
 		</div>
 		<div class="ImageList">
-			<SiteSmith:ImageList runat="server" ID="ilMain" PreviewImageControlId="iMain"></SiteSmith:ImageList>
+			<SiteSmith:ImageList ID="ilMain" runat="server" PreviewImageControlId="iMain" />
+		</div>
+		<div class="Selector">
+			<SiteSmith:PermutationSelector ID="psMain" runat="server" />
 		</div>
 	</div>
 	<div class="RCol">
@@ -17,7 +23,7 @@
 		<div class="DeliveryOptions"><asp:Label ID="lDeliveryOptions" runat="server" /></div>
 		<div class="Buttons">
 			<div class="AddToCart">
-				<asp:Button ID="bAddToCart" runat="server" Text="Add to Cart" />	
+				<asp:Button ID="bAddToCart" runat="server" Text="Add to Cart" />
 			</div>
 			<div class="AddToWishlist">
 				<asp:Button ID="bAddToWishlist" runat="server" Text="Add to Wishlist" />	

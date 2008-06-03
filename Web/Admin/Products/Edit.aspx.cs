@@ -4,26 +4,26 @@
  */
 
 using System;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Web.UI.WebControls;
 
 using YatesMorrison.SiteSmith.Data;
-using System.Data.SqlClient;
-using System.Web.UI.WebControls;
 
 namespace YatesMorrison.SiteSmith.Web.Admin.Products
 {
 	public partial class Edit : BasePage
 	{
-		protected override void BindData()
+		protected void Page_DataBinding( object sender, EventArgs e )
 		{
-			if (ItemId != null)
+			if( ItemId != null )
 			{
-				using (SiteSmithDataContext context = new SiteSmithDataContext())
+				using( SiteSmithDataContext context = new SiteSmithDataContext() )
 				{
 					Product product = context.Products.FirstOrDefault(p =>
 						p.ProductId == ItemId);
 
-					if (product != null)
+					if( product != null )
 					{
 						tbName.Text = product.Name;
 						tbDescription.Text = product.Description;
@@ -33,7 +33,7 @@ namespace YatesMorrison.SiteSmith.Web.Admin.Products
 						ddlManufacturer.DataValueField = "ManufacturerId";
 						ddlManufacturer.DataBind();
 
-						if (product.ManufacturerIdFk.HasValue)
+						if( product.ManufacturerIdFk.HasValue )
 						{
 							ddlManufacturer.SelectedValue = product.ManufacturerIdFk.ToString();
 						}
@@ -64,7 +64,7 @@ namespace YatesMorrison.SiteSmith.Web.Admin.Products
 					}
 
 					context.SubmitChanges();
-					BindData();
+					DataBind(true);
 				}
 			}
 		}
@@ -91,7 +91,7 @@ namespace YatesMorrison.SiteSmith.Web.Admin.Products
 						try
 						{
 							context.SubmitChanges();
-							BindData();
+							DataBind(true);
 						}
 						catch (SqlException ex)
 						{
@@ -122,7 +122,7 @@ namespace YatesMorrison.SiteSmith.Web.Admin.Products
 						{
 							context.ProductTags.DeleteOnSubmit(productTag);
 							context.SubmitChanges();
-							BindData();
+							DataBind(true);
 						}
 					}
 				}

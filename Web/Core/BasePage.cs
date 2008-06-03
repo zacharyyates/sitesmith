@@ -18,19 +18,21 @@ namespace YatesMorrison.SiteSmith.Web
 		{
 			get
 			{
-				if (!string.IsNullOrEmpty(Request.QueryString["id"]))
-					return new Guid(Request.QueryString["id"]);
-				else
-					return null;
+				string itemIdStr = Request.QueryString["id"];
+				if( !string.IsNullOrEmpty(itemIdStr) )
+				{
+					Guid? value = null;
+					if( GuidExtensions.TryParse(itemIdStr, out value) )
+						return value;
+				}
+				return null;
 			}
 		}
 
 		protected override void OnLoad( EventArgs e )
 		{
-			if (!IsPostBack) { BindData(); }
+			if( !IsPostBack ) { DataBind(true); }
 			base.OnLoad(e);
 		}
-
-		protected virtual void BindData() { }
 	}
 }

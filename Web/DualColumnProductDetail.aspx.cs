@@ -1,23 +1,32 @@
-﻿using System;
-using System.Collections;
-using System.Configuration;
-using System.Data;
+﻿/* Zachary Yates
+ * Copyright © 2008 YatesMorrison Software, LLC.
+ * 6/2/2008 7:57:09 PM
+ */
+
+using System;
 using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
-using System.Xml.Linq;
+using YatesMorrison.SiteSmith.Data;
 
 namespace YatesMorrison.SiteSmith.Web
 {
-	public partial class DualColumnProductDetail : System.Web.UI.Page
+	public partial class DualColumnProductDetail : DetailPage<Product>
 	{
-		protected void Page_Load( object sender, EventArgs e )
+		protected override void OnDataBinding( EventArgs e )
 		{
+			// Retrieve data item
+			if( ItemId != null )
+			{
+				using( SiteSmithDataContext context = new SiteSmithDataContext() )
+				{
+					DataItem = context.Products.FirstOrDefault(p =>
+						p.ProductId == ItemId);
 
+					bpdcMain.DataItem = DataItem;
+					bpdcMain.DataBind();
+				}				
+			}
+
+			base.OnDataBinding(e);
 		}
 	}
 }

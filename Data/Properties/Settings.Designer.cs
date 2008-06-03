@@ -44,5 +44,16 @@ namespace YatesMorrison.SiteSmith.Data.Properties {
                 return ((string)(this["SiteSmith_ApplicationConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\yms_sqlexpress;Initial Catalog=SiteSmith.Application;Integrated Sec" +
+            "urity=True")]
+        public string SiteSmith_ApplicationConnectionString2 {
+            get {
+                return ((string)(this["SiteSmith_ApplicationConnectionString2"]));
+            }
+        }
     }
 }

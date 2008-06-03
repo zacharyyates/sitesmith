@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="SiteSmith.Application" Class="SiteSmithDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=glddit12849\sqlexpress;Initial Catalog=SiteSmith.Application;Integrated Security=True" SettingsObjectName="YatesMorrison.SiteSmith.Data.Properties.Settings" SettingsPropertyName="SiteSmith_ApplicationConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\yms_sqlexpress;Initial Catalog=SiteSmith.Application;Integrated Security=True" SettingsObjectName="YatesMorrison.SiteSmith.Data.Properties.Settings" SettingsPropertyName="SiteSmith_ApplicationConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Account" Member="Accounts">
     <Type Name="Account">
       <Column Name="AccountId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
