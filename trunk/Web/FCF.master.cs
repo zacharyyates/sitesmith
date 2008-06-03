@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web.UI;
 using System.Linq;
 
 using YatesMorrison.SiteSmith.Data;
@@ -9,17 +8,9 @@ namespace YatesMorrison.SiteSmith.Web
 {
 	public partial class FCF : BaseMasterPage
 	{
-		protected void Page_Load(object sender, EventArgs e)
+		protected void Page_DataBinding( object sender, EventArgs e )
 		{
-			if (!IsPostBack)
-			{
-				BindData();
-			}
-		}
-
-		void BindData()
-		{
-			using (SiteSmithDataContext context = new SiteSmithDataContext())
+			using( SiteSmithDataContext context = new SiteSmithDataContext() )
 			{
 				lvDepartments.DataSource = context.Departments.ToList();
 				lvDepartments.DataBind();

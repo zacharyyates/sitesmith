@@ -5,7 +5,7 @@
 		<SiteSmith:BlockProductDetailControl ID="bpdcMain" runat="server" />
 	</div>
 	<div class="RightColumn">
-	
+		
 	</div>
 </asp:Content>
 <asp:Content ID="cRight" ContentPlaceHolderID="cphMainContentRight" runat="server">

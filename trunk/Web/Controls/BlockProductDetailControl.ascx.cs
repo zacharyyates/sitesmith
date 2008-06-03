@@ -1,23 +1,26 @@
 ﻿using System;
-using System.Collections;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Xml.Linq;
+
+using YatesMorrison.SiteSmith.Data;
 
 namespace YatesMorrison.SiteSmith.Web.Controls
 {
-	public partial class BlockProductControl : System.Web.UI.UserControl
+	public partial class BlockProductControl : BaseUserControl<Product>
 	{
-		protected void Page_Load( object sender, EventArgs e )
-		{
+		public bool ShowName { get; set; }
+		public bool ShowTags { get; set; }
 
+		protected override void OnDataBinding( EventArgs e )
+		{
+			if( DataItem != null )
+			{
+				lName.Text = ShowName ? DataItem.Name : string.Empty;
+				lPrice.Text = DataItem.ProductPermutations[0].MSRP.ToString(); // HACK: Set this correctly
+				psMain.DataItem = DataItem;
+				psMain.DataBind();
+			}
+
+			base.OnDataBinding(e);
 		}
 	}
 }

@@ -4,6 +4,7 @@
  */
 
 using System.Web.UI;
+using System;
 
 namespace YatesMorrison.SiteSmith.Web
 {
@@ -13,5 +14,10 @@ namespace YatesMorrison.SiteSmith.Web
 	public class BaseMasterPage : MasterPage
 	{
 		// TODO: Add any cross-page methods/properties here
+		protected override void OnLoad( EventArgs e )
+		{
+			if( !IsPostBack ) { DataBind(); }
+			base.OnLoad(e);
+		}
 	}
 }
