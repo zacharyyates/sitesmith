@@ -4,17 +4,14 @@
  */
 
 using System;
+using System.Configuration;
 using System.Linq;
 using System.Threading;
 
 using YatesMorrison.SiteSmith.Data;
-using System.Configuration;
-using System.Collections.Generic;
 
 namespace YatesMorrison.SiteSmith.Service
 {
-	// TODO: Eventually add automatic translation
-
 	public static class SettingService
 	{
 		public static string GetSetting( string name )

@@ -78,7 +78,6 @@
     </Compile>
     <Compile Include="Controls\BlockProductDetailControl.ascx.cs">
       <DependentUpon>BlockProductDetailControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\BlockProductDetailControl.ascx.designer.cs">
       <DependentUpon>BlockProductDetailControl.ascx</DependentUpon>
@@ -168,6 +167,7 @@
     <Content Include="Include\ImageHandler.ashx" />
     <Content Include="Media\Original\bff2149b-21e7-411b-9ff0-d3c7169652eb.GIF" />
     <Content Include="ProductDetail.aspx" />
+    <Content Include="Test\GoogleTranslate.htm" />
     <Content Include="Test\ImageList.aspx" />
   </ItemGroup>
   <ItemGroup>
