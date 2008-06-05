@@ -17,33 +17,17 @@ using System.Collections.Generic;
 
 namespace YatesMorrison.SiteSmith.Service
 {
-	//public enum TranslationMode
-	//{
-	//    en_zh,
-	//    en_fr,
-	//    en_de,
-	//    en_it,
-	//    en_ja,
-	//    en_ko,
-	//    en_pt,
-	//    en_es,
-	//    zh_en,
-	//    fr_en,
-	//    fr_de,
-	//    de_en,
-	//    de_fr,
-	//    it_en,
-	//    ja_en,
-	//    ko_en,
-	//    pt_en,
-	//    ru_en,
-	//    es_en
-	//}
-
 	public class TranslationMode
 	{
-		public string SourceLanguage { get; set; }
-		public string TargetLanguage { get; set; }
+		public TranslationMode() { }
+		public TranslationMode( TranslationMode mode )
+		{
+			SourceLanguage = mode.SourceLanguage;
+			TargetLanguage = mode.TargetLanguage;
+		}
+
+		public virtual string SourceLanguage { get; set; }
+		public virtual string TargetLanguage { get; set; }
 	}
 
 	public interface ITranslationService
@@ -117,15 +101,9 @@ namespace YatesMorrison.SiteSmith.Service
 			}
 		}
 
-		public virtual bool CanTranslate( TranslationMode mode )
-		{
-			return false;
-		}
+		public abstract bool CanTranslate( TranslationMode mode );
 
-		protected virtual string GetPostSourceData( TranslationMode mode, string text )
-		{
-			return text;
-		}
+		protected abstract string GetPostSourceData( TranslationMode mode, string text );
 
 		protected Exception GetStandardException( Exception innerException )
 		{
@@ -154,6 +132,10 @@ namespace YatesMorrison.SiteSmith.Service
 		{
 			get { return @"<div id=\""result\""><div style=\""padding:0.6em;\"">((?:.|\n)*?)</div></div>"; }
 			set { base.RegexMatch = value; }
+		}
+		public override string Name
+		{
+			get { return "BabelFish"; }
 		}
 
 		public override bool CanTranslate( TranslationMode mode )
@@ -217,6 +199,10 @@ namespace YatesMorrison.SiteSmith.Service
 			get { return @"<div id=\""result_box\"" dir=\""ltr\"">((?:.|\n)*?)</div>"; }
 			set { base.RegexMatch = value; }
 		}
+		public override string Name
+		{
+			get { return "Google"; }
+		}
 
 		public override bool CanTranslate( TranslationMode mode )
 		{
@@ -235,6 +221,47 @@ namespace YatesMorrison.SiteSmith.Service
 			bool targetFound = s_TargetLanguages.FindAll(targetStartsWith).Count > 0;
 
 			return sourceFound && targetFound;
+		}
+
+		protected override string GetPostSourceData( TranslationMode mode, string text )
+		{
+			throw new NotImplementedException();
+			// TODO: Figure out the post data
+		}
+
+		private class GoogleTranslationMode : TranslationMode
+		{
+			public override string SourceLanguage
+			{
+				get
+				{
+					if( !base.SourceLanguage.StartsWith("zh") )
+					{
+						return base.SourceLanguage.Substring(0, 2);
+					}
+					else
+					{
+						return base.SourceLanguage;
+					}
+				}
+				set	{ base.SourceLanguage = value; }
+			}
+
+			public override string TargetLanguage
+			{
+				get
+				{
+					if( !base.TargetLanguage.StartsWith("zh") )
+					{
+						return base.TargetLanguage.Substring(0, 2);
+					}
+					else
+					{
+						return base.TargetLanguage;
+					}
+				}
+				set { base.TargetLanguage = value; }
+			}
 		}
 	}
 }
