@@ -78,6 +78,7 @@
     </Compile>
     <Compile Include="Controls\BlockProductDetailControl.ascx.cs">
       <DependentUpon>BlockProductDetailControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\BlockProductDetailControl.ascx.designer.cs">
       <DependentUpon>BlockProductDetailControl.ascx</DependentUpon>

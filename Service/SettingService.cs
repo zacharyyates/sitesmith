@@ -38,14 +38,15 @@ namespace YatesMorrison.SiteSmith.Service
 						BabelFishTranslationService translator = new BabelFishTranslationService();
 						
 						foreach (Setting s in context.Settings.Where(s =>
-												s.Name.ToLower() == name.ToLower()))
+												s.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)))
 						{
+							TranslationMode mode = new TranslationMode(s.Language, language);
 							// Translate the first entry that can be translated
-							if (translator.CanTranslate(s.Language, language) && 
+							if (translator.CanTranslate( mode ) && 
 								s.AutoTranslate.HasValue &&
 								s.AutoTranslate.Value == true)
 							{
-								return translator.Translate(s.Language, language, s.Value);
+								return translator.Translate(mode, s.Value);
 							}
 						}
 						// Else, fall through and throw the exception
