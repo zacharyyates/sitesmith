@@ -1,19 +1,20 @@
 ﻿/* Zachary Yates
- * Copyright © 2008 YatesMorrison Software, LLC.
+ * Copyright © 2008 YatesMorrison Software Company
  * 5/20/2008 11:12:49 AM
  * Adapted From: http://www.codeproject.com/KB/cpp/translation.aspx
  * Original Author: Matthew Brealey, UK
  */
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Security;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
-using System.Collections.Generic;
 
 namespace YatesMorrison.SiteSmith.Service
 {
@@ -24,6 +25,11 @@ namespace YatesMorrison.SiteSmith.Service
 		{
 			SourceLanguage = mode.SourceLanguage;
 			TargetLanguage = mode.TargetLanguage;
+		}
+		public TranslationMode( string sourceLanguage, string targetLanguage )
+		{
+			SourceLanguage = sourceLanguage;
+			TargetLanguage = targetLanguage;
 		}
 
 		public virtual string SourceLanguage { get; set; }
@@ -36,7 +42,7 @@ namespace YatesMorrison.SiteSmith.Service
 		bool CanTranslate( TranslationMode mode );
 	}
 
-	public class BaseScreenScrapingTranslationService : ITranslationService
+	public abstract class BaseScreenScrapingTranslationService : ITranslationService
 	{
 		public virtual string Url { get; set; }
 		public virtual string Referer { get; set; }
@@ -45,11 +51,15 @@ namespace YatesMorrison.SiteSmith.Service
 		{
 			get { return "BaseScreenScraper"; }
 		}
+		public virtual TranslationMode CurrentTranslationMode { get; set; }
 
 		public virtual string Translate( TranslationMode mode, string text )
 		{
 			try
 			{
+				// set the current mode
+				CurrentTranslationMode = mode;
+
 				// validate and remove trailing spaces
 				if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
 				text = text.Trim();
@@ -90,7 +100,6 @@ namespace YatesMorrison.SiteSmith.Service
 			// Exceptions
 			catch (ArgumentNullException ex) { throw GetStandardException(ex); }
 			catch (ArgumentException ex) { throw GetStandardException(ex); }
-			catch (Exception ex) { throw GetStandardException(ex); }
 			catch (WebException ex)
 			{
 				throw new Exception("There was a problem connecting to the " + Name + " server.", ex);
@@ -99,6 +108,7 @@ namespace YatesMorrison.SiteSmith.Service
 			{
 				throw new Exception("You do not have permission to make HTTP connections. Please check your assembly's permission settings.", ex);
 			}
+			catch (Exception ex) { throw GetStandardException(ex); }
 		}
 
 		public abstract bool CanTranslate( TranslationMode mode );
@@ -113,15 +123,15 @@ namespace YatesMorrison.SiteSmith.Service
 
 	public class BabelFishTranslationService : BaseScreenScrapingTranslationService
 	{
-		static readonly List<string> s_SupportedModes = { 
+		static readonly List<string> s_SupportedModes = new List<string>() { 
 			"en_zh", "en_fr", "en_de", "en_it", "en_ja", "en_ko", "en_pt", "en_es", 
 			"zh_en", "fr_en", "fr_de", "de_en", "de_fr", "it_en", "ja_en", "ko_en", 
 			"pt_en", "ru_en", "es_en" };
 
 		public override string Url
 		{
-			get{ return "http://babelfish.yahoo.com/translate_txt"; }
-			set{ base.Url = value; }
+			get { return "http://babelfish.yahoo.com/translate_txt"; }
+			set { base.Url = value; }
 		}
 		public override string Referer
 		{
@@ -143,7 +153,7 @@ namespace YatesMorrison.SiteSmith.Service
 			BabelFishTranslationMode myMode = new BabelFishTranslationMode(mode);
 			if (!s_SupportedModes.Contains(myMode.ToString()))
 			{
-				Trace.TraceWarning("TranslationMode is not supported.", ex);
+				Trace.TraceWarning("TranslationMode is not supported: " + mode);
 				return false;
 			}
 			return true;
@@ -157,7 +167,7 @@ namespace YatesMorrison.SiteSmith.Service
 					myMode.ToString(), HttpUtility.UrlEncode(text));
 		}
 
-		private class BabelFishTranslationMode : TranslationMode
+		internal class BabelFishTranslationMode : TranslationMode
 		{
 			public BabelFishTranslationMode( TranslationMode mode )
 			{
@@ -174,19 +184,30 @@ namespace YatesMorrison.SiteSmith.Service
 
 	public class GoogleTranslationService : BaseScreenScrapingTranslationService
 	{
-		static readonly List<string> s_SourceLanguages = { 
+		static readonly List<string> s_SourceLanguages = new List<string>() { 
 			"auto", "ar", "bg", "zh-CN", "hr", "cs", "da", "nl", "en", 
 			"fi", "fr", "de", "el", "hi", "it", "ja", "ko", 
 			"no", "pl", "pt", "ro", "ru", "es", "sv" };
 
-		static readonly List<string> s_TargetLanguages = { 
+		static readonly List<string> s_TargetLanguages = new List<string>() { 
 			"ar", "bg", "zh-CN", "zh-TW", "hr", "cs", "da", "nl", "en", 
 			"fi", "fr", "de", "el", "hi", "it", "ja", "ko", 
 			"no", "pl", "pt", "ro", "ru", "es", "sv" };
 
 		public override string Url
 		{
-			get { return "http://translate.google.com/translate_t"; }
+			get
+			{
+				if (CurrentTranslationMode != null)
+				{
+					return string.Format("http://translate.google.com/translate_t?sl={0}&tl={1}",
+						CurrentTranslationMode.SourceLanguage, CurrentTranslationMode.TargetLanguage);
+				}
+				else
+				{
+					return "http://translate.google.com/translate_t";
+				}
+			}
 			set { base.Url = value; }
 		}
 		public override string Referer
@@ -196,7 +217,7 @@ namespace YatesMorrison.SiteSmith.Service
 		}
 		public override string RegexMatch
 		{
-			get { return @"<div id=\""result_box\"" dir=\""ltr\"">((?:.|\n)*?)</div>"; }
+			get { return @"<div id=result_box dir=\""ltr\"">((?:.|\n)*?)</div>"; }
 			set { base.RegexMatch = value; }
 		}
 		public override string Name
@@ -206,36 +227,32 @@ namespace YatesMorrison.SiteSmith.Service
 
 		public override bool CanTranslate( TranslationMode mode )
 		{
-			Predicate<string> sourceStartsWith = 
-				delegate( string item )
-				{
-					return mode.SourceLanguage.StartsWith(item);
-				};
-			bool sourceFound = s_SourceLanguages.FindAll(sourceStartsWith).Count > 0;
-
-			Predicate<string> targetStartsWith =
-				delegate( string item )
-				{
-					return mode.TargetLanguage.StartsWith(item);
-				};
-			bool targetFound = s_TargetLanguages.FindAll(targetStartsWith).Count > 0;
-
-			return sourceFound && targetFound;
+			var sourceFound = s_SourceLanguages.Count(s => s.StartsWith(mode.SourceLanguage, StringComparison.InvariantCultureIgnoreCase)) > 0;
+			var targetFound = s_TargetLanguages.Count(s => s.StartsWith(mode.TargetLanguage, StringComparison.InvariantCultureIgnoreCase)) > 0;
+			if (sourceFound && targetFound)
+			{
+				return true;
+			}
+			else
+			{
+				Trace.TraceWarning("Translation mode is not supported: " + mode);
+				return false;
+			}
 		}
 
 		protected override string GetPostSourceData( TranslationMode mode, string text )
 		{
-			throw new NotImplementedException();
-			// TODO: Figure out the post data
+			return string.Format("hl={0}&ie=UTF8&text={1}&sl={2}&tl={3}",
+				mode.SourceLanguage, HttpUtility.UrlEncode(text), mode.SourceLanguage, mode.TargetLanguage);
 		}
 
-		private class GoogleTranslationMode : TranslationMode
+		internal class GoogleTranslationMode : TranslationMode
 		{
 			public override string SourceLanguage
 			{
 				get
 				{
-					if( !base.SourceLanguage.StartsWith("zh") )
+					if (!base.SourceLanguage.StartsWith("zh"))
 					{
 						return base.SourceLanguage.Substring(0, 2);
 					}
@@ -244,14 +261,14 @@ namespace YatesMorrison.SiteSmith.Service
 						return base.SourceLanguage;
 					}
 				}
-				set	{ base.SourceLanguage = value; }
+				set { base.SourceLanguage = value; }
 			}
 
 			public override string TargetLanguage
 			{
 				get
 				{
-					if( !base.TargetLanguage.StartsWith("zh") )
+					if (!base.TargetLanguage.StartsWith("zh"))
 					{
 						return base.TargetLanguage.Substring(0, 2);
 					}
@@ -261,6 +278,11 @@ namespace YatesMorrison.SiteSmith.Service
 					}
 				}
 				set { base.TargetLanguage = value; }
+			}
+
+			public override string ToString()
+			{
+				return SourceLanguage + " to " + TargetLanguage;
 			}
 		}
 	}
