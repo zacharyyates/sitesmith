@@ -1,0 +1,3 @@
+﻿ALTER TABLE [dbo].[Contact] ADD CONSTRAINT [PK_Contact] PRIMARY KEY CLUSTERED  ([ContactId]) ON [PRIMARY]
+
+
