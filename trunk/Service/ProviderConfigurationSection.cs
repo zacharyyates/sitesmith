@@ -10,7 +10,7 @@ namespace YatesMorrison.SiteSmith.Service
 	/// <summary>
 	/// Custom configuration section for the generic provider
 	/// </summary>
-	/// <seealso cref="ECastServiceProviderManager"/>
+	/// <seealso cref="ProviderManager"/>
 	public class ProviderConfigurationSection : ConfigurationSection
 	{
 		[ConfigurationProperty("providers")]
