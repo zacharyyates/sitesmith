@@ -1,0 +1,3 @@
+﻿ALTER TABLE [dbo].[Product] ADD CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED  ([ProductId]) ON [PRIMARY]
+
+

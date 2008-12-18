@@ -1,0 +1,3 @@
+﻿ALTER TABLE [dbo].[Media] ADD CONSTRAINT [PK_Media] PRIMARY KEY CLUSTERED  ([MediaId]) ON [PRIMARY]
+
+

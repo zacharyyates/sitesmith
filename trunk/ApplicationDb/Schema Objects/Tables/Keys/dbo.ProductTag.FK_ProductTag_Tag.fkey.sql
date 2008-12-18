@@ -1,0 +1,4 @@
+﻿ALTER TABLE [dbo].[ProductTag] ADD
+CONSTRAINT [FK_ProductTag_Tag] FOREIGN KEY ([TagIdFk]) REFERENCES [dbo].[Tag] ([TagId]) ON DELETE CASCADE ON UPDATE CASCADE
+
+

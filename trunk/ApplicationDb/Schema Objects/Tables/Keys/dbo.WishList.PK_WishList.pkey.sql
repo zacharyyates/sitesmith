@@ -1,0 +1,3 @@
+﻿ALTER TABLE [dbo].[WishList] ADD CONSTRAINT [PK_WishList] PRIMARY KEY CLUSTERED  ([WishListId]) ON [PRIMARY]
+
+
