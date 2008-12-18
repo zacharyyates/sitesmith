@@ -24,11 +24,12 @@ namespace YatesMorrison.SiteSmith.Service
 		{
 			try
 			{
+				string providerName = typeof(TProvider).Name;
 				ProviderConfigurationSection configuration =
-                     ConfigurationManager.GetSection(typeof(TProvider).Name) as ProviderConfigurationSection;
+                     ConfigurationManager.GetSection(providerName) as ProviderConfigurationSection;
 
 				if (configuration == null)
-					throw new ConfigurationErrorsException("ConfigurationSection is null");
+					throw new ConfigurationErrorsException(string.Format("ConfigurationSection '{0}' is null", providerName));
 
 				s_Providers = new ProviderCollection<TProvider>();
 
