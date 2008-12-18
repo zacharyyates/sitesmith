@@ -12,11 +12,10 @@ using System.Web.Configuration;
 namespace YatesMorrison.SiteSmith.Service
 {
 	/// <summary>
-	/// Standard provider pattern implementation
+	/// TODO: Update this documentation -- Standard provider pattern implementation
 	/// </summary>
-	public static class ProviderManager<TProvider, TProviderConfigurationSection>
+	public static class ProviderManager<TProvider>
 		where TProvider : ProviderBase
-		where TProviderConfigurationSection : ProviderConfigurationSection
 	{
 		static TProvider s_Provider;
 		static ProviderCollection<TProvider> s_Providers;
@@ -25,8 +24,8 @@ namespace YatesMorrison.SiteSmith.Service
 		{
 			try
 			{
-				TProviderConfigurationSection configuration =
-                     ConfigurationManager.GetSection(typeof(TProvider).Name) as TProviderConfigurationSection;
+				ProviderConfigurationSection configuration =
+                     ConfigurationManager.GetSection(typeof(TProvider).Name) as ProviderConfigurationSection;
 
 				if (configuration == null)
 					throw new ConfigurationErrorsException("ConfigurationSection is null");
