@@ -16,7 +16,7 @@ namespace YatesMorrison.SiteSmith.Web.Admin.Products
 			{
 				Product product = new Product
 				{
-					ProductId = Guid.NewGuid(),
+					Id = Guid.NewGuid(),
 					Name = "New Product",
 					Created = DateTime.UtcNow,
 					Modified = DateTime.UtcNow
@@ -25,7 +25,7 @@ namespace YatesMorrison.SiteSmith.Web.Admin.Products
 				context.Products.InsertOnSubmit(product);
 				context.SubmitChanges();
 
-				Response.Redirect("Edit.aspx?id=" + product.ProductId);
+				Response.Redirect("Edit.aspx?id=" + product.Id);
 			}
 		}
 	}

@@ -22,7 +22,7 @@ namespace YatesMorrison.SiteSmith.Web.Controls
 					( from p in context.Products
 					  from pp in p.ProductPermutations
 					  from pa in pp.ProductAttributes
-					  where p.ProductId == DataItem.ProductId
+					  where p.Id == DataItem.Id
 					  select pa.Name )
 					.Distinct();
 				int count = attributeNames.Count();
@@ -36,7 +36,7 @@ namespace YatesMorrison.SiteSmith.Web.Controls
 						  from pp in p.ProductPermutations
 						  from pa in pp.ProductAttributes
 						  where
-						   p.ProductId == DataItem.ProductId &&
+						   p.Id == DataItem.Id &&
 						   pa.Name == name
 						  select pa.Value )
 						.Distinct();

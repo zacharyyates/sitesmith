@@ -1,31 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Database Name="SiteSmith.Application" Class="SiteSmithDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.\yms_sqlexpress;Initial Catalog=SiteSmith.Application;Integrated Security=True" SettingsObjectName="YatesMorrison.SiteSmith.Data.Properties.Settings" SettingsPropertyName="SiteSmith_ApplicationConnectionString2" Provider="System.Data.SqlClient" />
+<Database Name="SiteSmith2008" Class="SiteSmithDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\sqlexpress;Initial Catalog=SiteSmith2008;Integrated Security=True" SettingsObjectName="YatesMorrison.SiteSmith.Data.Properties.Settings" SettingsPropertyName="SiteSmith2008ConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Account" Member="Accounts">
     <Type Name="Account">
-      <Column Name="AccountId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AccountId" Member="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="Created" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Deleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="IsEnabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Restriction" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
-      <Association Name="Account_Customer" Member="Customers" ThisKey="AccountId" OtherKey="AccountIdFk" Type="Customer" />
+      <Association Name="Account_Customer" Member="Customers" ThisKey="Id" OtherKey="AccountId" Type="Customer" />
     </Type>
   </Table>
   <Table Name="dbo.WishListItem" Member="WishListItems">
     <Type Name="WishListItem">
-      <Column Name="WishListIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ProductPermutationIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="WishListIdFk" Member="WishListId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProductPermutationIdFk" Member="ProductPermutationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="ProductPermutation_WishListItem" Member="ProductPermutation" ThisKey="ProductPermutationIdFk" OtherKey="ProductPermutationId" Type="ProductPermutation" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="WishList_WishListItem" Member="WishList" ThisKey="WishListIdFk" OtherKey="WishListId" Type="WishList" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="ProductPermutation_WishListItem" Member="ProductPermutation" ThisKey="ProductPermutationId" OtherKey="Id" Type="ProductPermutation" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="WishList_WishListItem" Member="WishList" ThisKey="WishListId" OtherKey="Id" Type="WishList" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Address" Member="Addresses">
     <Type Name="Address">
-      <Column Name="AddressId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ContactIdFk" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="AddressId" Member="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ContactIdFk" Member="ContactId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Street1" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Street2" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
@@ -33,117 +33,169 @@
       <Column Name="State" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="PostalCode" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
       <Column Name="Country" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Association Name="Contact_Address" Member="Contact" ThisKey="ContactIdFk" OtherKey="ContactId" Type="Contact" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Contact_Address" Member="Contact" ThisKey="ContactId" OtherKey="Id" Type="Contact" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Contact" Member="Contacts">
+    <Type Name="Contact">
+      <Column Name="ContactId" Member="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Company" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="EmailAddress" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Contact_Address" Member="Addresses" ThisKey="Id" OtherKey="ContactId" Type="Address" />
+      <Association Name="Contact_Customer" Member="Customers" ThisKey="Id" OtherKey="ContactId" Type="Customer" />
+      <Association Name="Contact_Manufacturer" Member="Manufacturers" ThisKey="Id" OtherKey="ContactId" Type="Manufacturer" />
+      <Association Name="Contact_Phone" Member="Phones" ThisKey="Id" OtherKey="ContactId" Type="Phone" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Customer" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="CustomerId" Member="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AccountIdFk" Member="AccountId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ContactIdFk" Member="ContactId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="LastActivity" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsEnabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TimezoneOffset" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="Customer_CustomerFriend" Member="CustomerFriends" ThisKey="Id" OtherKey="CustomerId" Type="CustomerFriend" />
+      <Association Name="Customer_CustomerFriend1" Member="Friends" ThisKey="Id" OtherKey="FriendId" Type="CustomerFriend" />
+      <Association Name="Customer_Feedback" Member="Feedbacks" ThisKey="Id" OtherKey="CustomerId" Type="Feedback" />
+      <Association Name="Customer_FeedbackFlag" Member="FeedbackFlags" ThisKey="Id" OtherKey="CustomerId" Type="FeedbackFlag" />
+      <Association Name="Customer_Order" Member="Orders" ThisKey="Id" OtherKey="CustomerId" Type="Order" />
+      <Association Name="Customer_ProductReview" Member="ProductReviews" ThisKey="Id" OtherKey="CustomerId" Type="ProductReview" />
+      <Association Name="Customer_Vote" Member="Votes" ThisKey="Id" OtherKey="CustomerId" Type="Vote" />
+      <Association Name="Customer_WishList" Member="WishLists" ThisKey="Id" OtherKey="CustomerId" Type="WishList" />
+      <Association Name="Account_Customer" Member="Account" ThisKey="AccountId" OtherKey="Id" Type="Account" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Contact_Customer" Member="Contact" ThisKey="ContactId" OtherKey="Id" Type="Contact" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.CustomerFriend" Member="CustomerFriends">
     <Type Name="CustomerFriend">
-      <Column Name="CustomerIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="FriendIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CustomerIdFk" Member="CustomerId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FriendIdFk" Member="FriendId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="IsBlocked" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="Customer_CustomerFriend" Member="Customer" Storage="_Customer1" ThisKey="FriendIdFk" OtherKey="CustomerId" Type="Customer" IsForeignKey="true" />
+      <Association Name="Customer_CustomerFriend" Member="Customer" ThisKey="CustomerId" OtherKey="Id" Type="Customer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Customer_CustomerFriend1" Member="Customer1" ThisKey="FriendId" OtherKey="Id" Type="Customer" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Department" Member="Departments">
     <Type Name="Department">
-      <Column Name="DepartmentId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DepartmentId" Member="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Association Name="Department_Product" Member="Products" ThisKey="DepartmentId" OtherKey="DepartmentIdFk" Type="Product" />
+      <Association Name="Department_Product" Member="Products" ThisKey="Id" OtherKey="DepartmentId" Type="Product" />
     </Type>
   </Table>
   <Table Name="dbo.Discount" Member="Discounts">
     <Type Name="Discount">
-      <Column Name="DiscountId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DiscountId" Member="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Value" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="Type" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
-      <Column Name="ProductPermutationIdFk" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Association Name="ProductPermutation_Discount" Member="ProductPermutation" ThisKey="ProductPermutationIdFk" OtherKey="ProductPermutationId" Type="ProductPermutation" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Column Name="ProductPermutationIdFk" Member="ProductPermutationId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="ProductPermutation_Discount" Member="ProductPermutation" ThisKey="ProductPermutationId" OtherKey="Id" Type="ProductPermutation" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Feedback" Member="Feedbacks">
     <Type Name="Feedback">
-      <Column Name="FeedbackId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="CustomerIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="FeedbackId" Member="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CustomerIdFk" Member="CustomerId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="IsFlagged" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Created" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Deleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="IsVisible" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="Feedback_FeedbackFlag" Member="FeedbackFlags" ThisKey="FeedbackId" OtherKey="FeedbackIdFk" Type="FeedbackFlag" />
-      <Association Name="Customer_Feedback" Member="Customer" ThisKey="CustomerIdFk" OtherKey="CustomerId" Type="Customer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Feedback_FeedbackFlag" Member="FeedbackFlags" ThisKey="Id" OtherKey="FeedbackId" Type="FeedbackFlag" />
+      <Association Name="Customer_Feedback" Member="Customer" ThisKey="CustomerId" OtherKey="Id" Type="Customer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.FeedbackFlag" Member="FeedbackFlags">
     <Type Name="FeedbackFlag">
-      <Column Name="FeedbackFlagId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="FeedbackIdFk" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="CustomerIdFk" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="FeedbackFlagId" Member="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FeedbackIdFk" Member="FeedbackId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="CustomerIdFk" Member="CustomerId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="Created" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Deleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Responded" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Response" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Association Name="Feedback_FeedbackFlag" Member="Feedback" ThisKey="FeedbackIdFk" OtherKey="FeedbackId" Type="Feedback" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="Customer_FeedbackFlag" Member="Customer" ThisKey="CustomerIdFk" OtherKey="CustomerId" Type="Customer" IsForeignKey="true" />
+      <Association Name="Customer_FeedbackFlag" Member="Customer" ThisKey="CustomerId" OtherKey="Id" Type="Customer" IsForeignKey="true" />
+      <Association Name="Feedback_FeedbackFlag" Member="Feedback" ThisKey="FeedbackId" OtherKey="Id" Type="Feedback" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Manufacturer" Member="Manufacturers">
     <Type Name="Manufacturer">
-      <Column Name="ManufacturerIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ContactIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ManufacturerId" Member="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ContactIdFk" Member="ContactId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Association Name="Manufacturer_Product" Member="Products" ThisKey="ManufacturerIdFk" OtherKey="ManufacturerIdFk" Type="Product" />
-      <Association Name="Contact_Manufacturer" Member="Contact" ThisKey="ContactIdFk" OtherKey="ContactId" Type="Contact" IsForeignKey="true" />
+      <Association Name="Manufacturer_Product" Member="Products" ThisKey="Id" OtherKey="ManufacturerId" Type="Product" />
+      <Association Name="Contact_Manufacturer" Member="Contact" ThisKey="ContactId" OtherKey="Id" Type="Contact" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Media" Member="Medias">
+    <Type Name="Media">
+      <Column Name="MediaId" Member="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Path" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Type" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="Size" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Created" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Width" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Height" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Extension" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Media_ProductMedia" Member="ProductMedias" ThisKey="Id" OtherKey="MediaId" Type="ProductMedia" />
     </Type>
   </Table>
   <Table Name="dbo.[Order]" Member="Orders">
     <Type Name="Order">
-      <Column Name="OrderId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="CustomerIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="OrderId" Member="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CustomerIdFk" Member="CustomerId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="Identifier" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Submitted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Completed" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="Order_OrderItem" Member="OrderItems" ThisKey="OrderId" OtherKey="OrderIdFk" Type="OrderItem" />
-      <Association Name="Order_Shipment" Member="Shipments" ThisKey="OrderId" OtherKey="OrderIdFk" Type="Shipment" />
-      <Association Name="Customer_Order" Member="Customer" ThisKey="CustomerIdFk" OtherKey="CustomerId" Type="Customer" IsForeignKey="true" />
+      <Association Name="Order_OrderItem" Member="OrderItems" ThisKey="Id" OtherKey="OrderId" Type="OrderItem" />
+      <Association Name="Order_Shipment" Member="Shipments" ThisKey="Id" OtherKey="OrderId" Type="Shipment" />
+      <Association Name="Customer_Order" Member="Customer" ThisKey="CustomerId" OtherKey="Id" Type="Customer" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.OrderItem" Member="OrderItems">
     <Type Name="OrderItem">
-      <Column Name="OrderIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ProductPermutationIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="OrderIdFk" Member="OrderId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProductPermutationIdFk" Member="ProductPermutationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="UnitPrice" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Association Name="Order_OrderItem" Member="Order" ThisKey="OrderIdFk" OtherKey="OrderId" Type="Order" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="ProductPermutation_OrderItem" Member="ProductPermutation" ThisKey="ProductPermutationIdFk" OtherKey="ProductPermutationId" Type="ProductPermutation" IsForeignKey="true" />
+      <Association Name="Order_OrderItem" Member="Order" ThisKey="OrderId" OtherKey="Id" Type="Order" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="ProductPermutation_OrderItem" Member="ProductPermutation" ThisKey="ProductPermutationId" OtherKey="Id" Type="ProductPermutation" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Phone" Member="Phones">
     <Type Name="Phone">
-      <Column Name="PhoneId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ContactIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneId" Member="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ContactIdFk" Member="ContactId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Number" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
-      <Association Name="Contact_Phone" Member="Contact" ThisKey="ContactIdFk" OtherKey="ContactId" Type="Contact" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Contact_Phone" Member="Contact" ThisKey="ContactId" OtherKey="Id" Type="Contact" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Price" Member="Prices">
     <Type Name="Price">
-      <Column Name="ProductPermutationIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProductPermutationIdFk" Member="ProductPermutationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Value" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Association Name="ProductPermutation_Price" Member="ProductPermutation" ThisKey="ProductPermutationIdFk" OtherKey="ProductPermutationId" Type="ProductPermutation" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="ProductPermutation_Price" Member="ProductPermutation" ThisKey="ProductPermutationId" OtherKey="Id" Type="ProductPermutation" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Product" Member="Products">
     <Type Name="Product">
-      <Column Name="ProductId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ManufacturerIdFk" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="DepartmentIdFk" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="ProductId" Member="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ManufacturerIdFk" Member="ManufacturerId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="DepartmentIdFk" Member="DepartmentId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Released" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -152,181 +204,131 @@
       <Column Name="Modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Deleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="DeliveryType" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
-      <Association Name="Product_ProductMedia" Member="ProductMedias" ThisKey="ProductId" OtherKey="ProductIdFk" Type="ProductMedia" />
-      <Association Name="Product_ProductPermutation" Member="ProductPermutations" ThisKey="ProductId" OtherKey="ProductIdFk" Type="ProductPermutation" />
-      <Association Name="Product_ProductReview" Member="ProductReviews" ThisKey="ProductId" OtherKey="ProductIdFk" Type="ProductReview" />
-      <Association Name="Product_ProductTag" Member="ProductTags" ThisKey="ProductId" OtherKey="ProductIdFk" Type="ProductTag" />
-      <Association Name="Department_Product" Member="Department" ThisKey="DepartmentIdFk" OtherKey="DepartmentId" Type="Department" IsForeignKey="true" DeleteRule="SET NULL" />
-      <Association Name="Manufacturer_Product" Member="Manufacturer" ThisKey="ManufacturerIdFk" OtherKey="ManufacturerIdFk" Type="Manufacturer" IsForeignKey="true" />
+      <Association Name="Product_ProductMedia" Member="ProductMedias" ThisKey="Id" OtherKey="ProductId" Type="ProductMedia" />
+      <Association Name="Product_ProductPermutation" Member="ProductPermutations" ThisKey="Id" OtherKey="ProductId" Type="ProductPermutation" />
+      <Association Name="Product_ProductReview" Member="ProductReviews" ThisKey="Id" OtherKey="ProductId" Type="ProductReview" />
+      <Association Name="Product_ProductTag" Member="ProductTags" ThisKey="Id" OtherKey="ProductId" Type="ProductTag" />
+      <Association Name="Department_Product" Member="Department" ThisKey="DepartmentId" OtherKey="Id" Type="Department" IsForeignKey="true" DeleteRule="SET NULL" />
+      <Association Name="Manufacturer_Product" Member="Manufacturer" ThisKey="ManufacturerId" OtherKey="Id" Type="Manufacturer" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ProductAttribute" Member="ProductAttributes">
     <Type Name="ProductAttribute">
-      <Column Name="ProductPermutationIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProductPermutationIdFk" Member="ProductPermutationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Value" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Association Name="ProductPermutation_ProductAttribute" Member="ProductPermutation" ThisKey="ProductPermutationIdFk" OtherKey="ProductPermutationId" Type="ProductPermutation" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="ProductPermutation_ProductAttribute" Member="ProductPermutation" ThisKey="ProductPermutationId" OtherKey="Id" Type="ProductPermutation" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.ProductMedia" Member="ProductMedias">
     <Type Name="ProductMedia">
-      <Column Name="ProductIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="MediaIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProductIdFk" Member="ProductId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MediaIdFk" Member="MediaId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="IsVisible" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="Product_ProductMedia" Member="Product" ThisKey="ProductIdFk" OtherKey="ProductId" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="Media_ProductMedia" Member="Media" ThisKey="MediaIdFk" OtherKey="MediaId" Type="Media" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Media_ProductMedia" Member="Media" ThisKey="MediaId" OtherKey="Id" Type="Media" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Product_ProductMedia" Member="Product" ThisKey="ProductId" OtherKey="Id" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.ProductPermutation" Member="ProductPermutations">
     <Type Name="ProductPermutation">
-      <Column Name="ProductPermutationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ProductIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ProductPermutationId" Member="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProductIdFk" Member="ProductId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="Identifier" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="MSRP" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="MAP" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="IsVisible" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="IsAvailable" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="ProductPermutation_WishListItem" Member="WishListItems" ThisKey="ProductPermutationId" OtherKey="ProductPermutationIdFk" Type="WishListItem" />
-      <Association Name="ProductPermutation_Discount" Member="Discounts" ThisKey="ProductPermutationId" OtherKey="ProductPermutationIdFk" Type="Discount" />
-      <Association Name="ProductPermutation_OrderItem" Member="OrderItems" ThisKey="ProductPermutationId" OtherKey="ProductPermutationIdFk" Type="OrderItem" />
-      <Association Name="ProductPermutation_Price" Member="Prices" ThisKey="ProductPermutationId" OtherKey="ProductPermutationIdFk" Type="Price" />
-      <Association Name="ProductPermutation_ProductAttribute" Member="ProductAttributes" ThisKey="ProductPermutationId" OtherKey="ProductPermutationIdFk" Type="ProductAttribute" />
-      <Association Name="ProductPermutation_ShipmentItem" Member="ShipmentItems" ThisKey="ProductPermutationId" OtherKey="ProductPermutationIdFk" Type="ShipmentItem" />
-      <Association Name="ProductPermutation_Stock" Member="Stocks" ThisKey="ProductPermutationId" OtherKey="ProductPermutationIdFk" Type="Stock" />
-      <Association Name="Product_ProductPermutation" Member="Product" ThisKey="ProductIdFk" OtherKey="ProductId" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="ProductPermutation_WishListItem" Member="WishListItems" ThisKey="Id" OtherKey="ProductPermutationId" Type="WishListItem" />
+      <Association Name="ProductPermutation_Discount" Member="Discounts" ThisKey="Id" OtherKey="ProductPermutationId" Type="Discount" />
+      <Association Name="ProductPermutation_OrderItem" Member="OrderItems" ThisKey="Id" OtherKey="ProductPermutationId" Type="OrderItem" />
+      <Association Name="ProductPermutation_Price" Member="Prices" ThisKey="Id" OtherKey="ProductPermutationId" Type="Price" />
+      <Association Name="ProductPermutation_ProductAttribute" Member="ProductAttributes" ThisKey="Id" OtherKey="ProductPermutationId" Type="ProductAttribute" />
+      <Association Name="ProductPermutation_ShipmentItem" Member="ShipmentItems" ThisKey="Id" OtherKey="ProductPermutationId" Type="ShipmentItem" />
+      <Association Name="ProductPermutation_Stock" Member="Stocks" ThisKey="Id" OtherKey="ProductPermutationId" Type="Stock" />
+      <Association Name="Product_ProductPermutation" Member="Product" ThisKey="ProductId" OtherKey="Id" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.ProductReview" Member="ProductReviews">
     <Type Name="ProductReview">
-      <Column Name="ProductIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="CustomerIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="FeedbackIdFk" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="ProductIdFk" Member="ProductId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CustomerIdFk" Member="CustomerId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FeedbackIdFk" Member="FeedbackId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Rating" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
-      <Association Name="Product_ProductReview" Member="Product" ThisKey="ProductIdFk" OtherKey="ProductId" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="Customer_ProductReview" Member="Customer" ThisKey="CustomerIdFk" OtherKey="CustomerId" Type="Customer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Customer_ProductReview" Member="Customer" ThisKey="CustomerId" OtherKey="Id" Type="Customer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Product_ProductReview" Member="Product" ThisKey="ProductId" OtherKey="Id" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.ProductTag" Member="ProductTags">
     <Type Name="ProductTag">
-      <Column Name="ProductIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="TagIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="Product_ProductTag" Member="Product" ThisKey="ProductIdFk" OtherKey="ProductId" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="Tag_ProductTag" Member="Tag" ThisKey="TagIdFk" OtherKey="Id" Type="Tag" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Column Name="ProductIdFk" Member="ProductId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TagIdFk" Member="TagId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Product_ProductTag" Member="Product" ThisKey="ProductId" OtherKey="Id" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Tag_ProductTag" Member="Tag" ThisKey="TagId" OtherKey="Id" Type="Tag" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Shipment" Member="Shipments">
     <Type Name="Shipment">
-      <Column Name="ShipmentId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="OrderIdFk" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="ShipmentId" Member="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="OrderIdFk" Member="OrderId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="Identifier" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Processed" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Filled" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Shipped" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="Shipment_ShipmentItem" Member="ShipmentItems" ThisKey="ShipmentId" OtherKey="ShipmentIdFk" Type="ShipmentItem" />
-      <Association Name="Order_Shipment" Member="Order" ThisKey="OrderIdFk" OtherKey="OrderId" Type="Order" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Shipment_ShipmentItem" Member="ShipmentItems" ThisKey="Id" OtherKey="ShipmentId" Type="ShipmentItem" />
+      <Association Name="Order_Shipment" Member="Order" ThisKey="OrderId" OtherKey="Id" Type="Order" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.ShipmentItem" Member="ShipmentItems">
     <Type Name="ShipmentItem">
-      <Column Name="ShipmentIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ProductPermutationIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ShipmentIdFk" Member="ShipmentId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProductPermutationIdFk" Member="ProductPermutationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="ProductPermutation_ShipmentItem" Member="ProductPermutation" ThisKey="ProductPermutationIdFk" OtherKey="ProductPermutationId" Type="ProductPermutation" IsForeignKey="true" />
-      <Association Name="Shipment_ShipmentItem" Member="Shipment" ThisKey="ShipmentIdFk" OtherKey="ShipmentId" Type="Shipment" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="ProductPermutation_ShipmentItem" Member="ProductPermutation" ThisKey="ProductPermutationId" OtherKey="Id" Type="ProductPermutation" IsForeignKey="true" />
+      <Association Name="Shipment_ShipmentItem" Member="Shipment" ThisKey="ShipmentId" OtherKey="Id" Type="Shipment" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Stock" Member="Stocks">
     <Type Name="Stock">
-      <Column Name="ProductPermutationIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="DistributionCenterIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProductPermutationIdFk" Member="ProductPermutationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DistributionCenterIdFk" Member="DistributionCenterId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Status" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
-      <Association Name="ProductPermutation_Stock" Member="ProductPermutation" ThisKey="ProductPermutationIdFk" OtherKey="ProductPermutationId" Type="ProductPermutation" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="ProductPermutation_Stock" Member="ProductPermutation" ThisKey="ProductPermutationId" OtherKey="Id" Type="ProductPermutation" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Tag" Member="Tags">
     <Type Name="Tag">
-      <Column Name="TagId" Member="Id" Storage="_TagId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TagId" Member="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Association Name="Tag_ProductTag" Member="ProductTags" ThisKey="Id" OtherKey="TagIdFk" Type="ProductTag" />
+      <Association Name="Tag_ProductTag" Member="ProductTags" ThisKey="Id" OtherKey="TagId" Type="ProductTag" />
     </Type>
   </Table>
   <Table Name="dbo.Vote" Member="Votes">
     <Type Name="Vote">
-      <Column Name="VoteId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="CustomerIdFk" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="VoteId" Member="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CustomerIdFk" Member="CustomerId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="Voted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="IsUp" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Reason" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Association Name="Customer_Vote" Member="Customer" ThisKey="CustomerIdFk" OtherKey="CustomerId" Type="Customer" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Customer_Vote" Member="Customer" ThisKey="CustomerId" OtherKey="Id" Type="Customer" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.WishList" Member="WishLists">
     <Type Name="WishList">
-      <Column Name="WishListId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="CustomerIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="WishListId" Member="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CustomerIdFk" Member="CustomerId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="IsPublic" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Expires" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="WishList_WishListItem" Member="WishListItems" ThisKey="WishListId" OtherKey="WishListIdFk" Type="WishListItem" />
-      <Association Name="Customer_WishList" Member="Customer" ThisKey="CustomerIdFk" OtherKey="CustomerId" Type="Customer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Customer" Member="Customers">
-    <Type Name="Customer">
-      <Column Name="CustomerId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="AccountIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="ContactIdFk" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="UserName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="LastActivity" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="IsEnabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="TimezoneOffset" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Association Name="Customer_CustomerFriend" Member="Friends" Storage="_CustomerFriends1" ThisKey="CustomerId" OtherKey="FriendIdFk" Type="CustomerFriend" />
-      <Association Name="Customer_Feedback" Member="Feedbacks" ThisKey="CustomerId" OtherKey="CustomerIdFk" Type="Feedback" />
-      <Association Name="Customer_FeedbackFlag" Member="FeedbackFlags" ThisKey="CustomerId" OtherKey="CustomerIdFk" Type="FeedbackFlag" />
-      <Association Name="Customer_Order" Member="Orders" ThisKey="CustomerId" OtherKey="CustomerIdFk" Type="Order" />
-      <Association Name="Customer_ProductReview" Member="ProductReviews" ThisKey="CustomerId" OtherKey="CustomerIdFk" Type="ProductReview" />
-      <Association Name="Customer_Vote" Member="Votes" ThisKey="CustomerId" OtherKey="CustomerIdFk" Type="Vote" />
-      <Association Name="Customer_WishList" Member="WishLists" ThisKey="CustomerId" OtherKey="CustomerIdFk" Type="WishList" />
-      <Association Name="Account_Customer" Member="Account" ThisKey="AccountIdFk" OtherKey="AccountId" Type="Account" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="Contact_Customer" Member="Contact" ThisKey="ContactIdFk" OtherKey="ContactId" Type="Contact" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Contact" Member="Contacts">
-    <Type Name="Contact">
-      <Column Name="ContactId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="FirstName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="LastName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Title" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Company" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="EmailAddress" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Association Name="Contact_Address" Member="Addresses" ThisKey="ContactId" OtherKey="ContactIdFk" Type="Address" />
-      <Association Name="Contact_Manufacturer" Member="Manufacturers" ThisKey="ContactId" OtherKey="ContactIdFk" Type="Manufacturer" />
-      <Association Name="Contact_Phone" Member="Phones" ThisKey="ContactId" OtherKey="ContactIdFk" Type="Phone" />
-      <Association Name="Contact_Customer" Member="Customers" ThisKey="ContactId" OtherKey="ContactIdFk" Type="Customer" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Media" Member="Medias">
-    <Type Name="Media">
-      <Column Name="MediaId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Path" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Type" Type="MediaType" DbType="Int" CanBeNull="true" />
-      <Column Name="Size" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Created" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Deleted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Width" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Height" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Extension" Type="System.String" DbType="VarChar(50)" CanBeNull="false" />
-      <Association Name="Media_ProductMedia" Member="ProductMedias" ThisKey="MediaId" OtherKey="MediaIdFk" Type="ProductMedia" />
+      <Association Name="WishList_WishListItem" Member="WishListItems" ThisKey="Id" OtherKey="WishListId" Type="WishListItem" />
+      <Association Name="Customer_WishList" Member="Customer" ThisKey="CustomerId" OtherKey="Id" Type="Customer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Setting" Member="Settings">
     <Type Name="Setting">
-      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Language" Storage="_Culture" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(127) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Culture" Type="System.String" DbType="NVarChar(127) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Value" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="AutoTranslate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
     </Type>

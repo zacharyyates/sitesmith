@@ -25,12 +25,12 @@ namespace YatesMorrison.SiteSmith.Service
 				Guid customerId = Guid.NewGuid();
 				customer = new Customer
 				{
-					CustomerId = customerId,
+					Id = customerId,
 					IsEnabled = true,
 					UserName = emailAddress,
 					Account = new Account
 					{
-						AccountId = Guid.NewGuid(),
+						Id = Guid.NewGuid(),
 						Name = emailAddress,
 						Created = DateTime.UtcNow,
 						Modified = DateTime.UtcNow,
@@ -39,7 +39,7 @@ namespace YatesMorrison.SiteSmith.Service
 					},
 					Contact = new Contact
 					{
-						ContactId = customerId,
+						Id = customerId,
 						EmailAddress = emailAddress
 					}
 				};
@@ -49,14 +49,14 @@ namespace YatesMorrison.SiteSmith.Service
 				// Create the authorization objects
 				Securable acctSecurable = new Securable
 				{
-					SecurableId = customer.Account.AccountId,
+					SecurableId = customer.Account.Id,
 					Name = emailAddress
 				};
 				authorizationContext.Securables.InsertOnSubmit(acctSecurable);
 
 				Securable custSecurable = new Securable
 				{
-					SecurableId = customer.CustomerId,
+					SecurableId = customer.Id,
 					Name = emailAddress
 				};
 				authorizationContext.Securables.InsertOnSubmit(custSecurable);

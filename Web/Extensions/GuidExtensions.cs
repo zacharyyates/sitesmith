@@ -8,27 +8,27 @@ namespace YatesMorrison.SiteSmith
 {
 	public static class GuidExtensions
 	{
-		public static bool TryParse( string s, out Guid result )
+		public static bool TryParse(string s, out Guid result)
 		{
 			try
 			{
 				result = new Guid(s);
 				return true;
 			}
-			catch( Exception ex )
+			catch (Exception) // TODO: Do something with this exception?
 			{
 				result = Guid.Empty;
 				return false;
 			}
 		}
-		public static bool TryParse( string s, out Guid? result )
+		public static bool TryParse(string s, out Guid? result)
 		{
 			try
 			{
 				result = new Guid(s);
 				return true;
 			}
-			catch( Exception ex )
+			catch (Exception) // TODO: Do something with this exception?
 			{
 				result = null;
 				return false;

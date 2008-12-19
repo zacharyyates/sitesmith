@@ -28,7 +28,7 @@ namespace YatesMorrison.SiteSmith.Web
 				using (SiteSmithDataContext context = new SiteSmithDataContext())
 				{
 					Product = context.Products.FirstOrDefault(p =>
-						p.ProductId == new Guid(productId));
+						p.Id == new Guid(productId));
 				}
 			}
 			else

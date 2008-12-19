@@ -28,9 +28,9 @@ namespace YatesMorrison.SiteSmith.Test
 
 			using (SiteSmithDataContext context = new SiteSmithDataContext())
 			{
-				Customer customer2 = context.Customers.Single(c => c.CustomerId == customer1.CustomerId);
+				Customer customer2 = context.Customers.Single(c => c.Id == customer1.Id);
 				Assert.IsNotNull(customer2);
-				Trace.TraceInformation(customer2.CustomerId.ToString());
+				Trace.TraceInformation(customer2.Id.ToString());
 
 				context.Customers.DeleteOnSubmit(customer2);
 				context.SubmitChanges();
