@@ -21,7 +21,7 @@ namespace YatesMorrison.SiteSmith.Web.Admin.Products
 				using( SiteSmithDataContext context = new SiteSmithDataContext() )
 				{
 					Product product = context.Products.FirstOrDefault(p =>
-						p.ProductId == ItemId);
+						p.Id == ItemId);
 
 					if( product != null )
 					{
@@ -33,9 +33,9 @@ namespace YatesMorrison.SiteSmith.Web.Admin.Products
 						ddlManufacturer.DataValueField = "ManufacturerId";
 						ddlManufacturer.DataBind();
 
-						if( product.ManufacturerIdFk.HasValue )
+						if( product.ManufacturerId.HasValue )
 						{
-							ddlManufacturer.SelectedValue = product.ManufacturerIdFk.ToString();
+							ddlManufacturer.SelectedValue = product.ManufacturerId.ToString();
 						}
 
 						gvTags.DataSource = from t in product.ProductTags
@@ -51,7 +51,7 @@ namespace YatesMorrison.SiteSmith.Web.Admin.Products
 			using (SiteSmithDataContext context = new SiteSmithDataContext())
 			{
 				Product product = context.Products.FirstOrDefault(p =>
-						p.ProductId == ItemId);
+						p.Id == ItemId);
 
 				if (product != null)
 				{
@@ -60,7 +60,7 @@ namespace YatesMorrison.SiteSmith.Web.Admin.Products
 
 					if (!string.IsNullOrEmpty(ddlManufacturer.SelectedValue))
 					{
-						product.ManufacturerIdFk = new Guid(ddlManufacturer.SelectedValue);
+						product.ManufacturerId = new Guid(ddlManufacturer.SelectedValue);
 					}
 
 					context.SubmitChanges();
@@ -74,7 +74,7 @@ namespace YatesMorrison.SiteSmith.Web.Admin.Products
 			using (SiteSmithDataContext context = new SiteSmithDataContext())
 			{
 				Product product = context.Products.FirstOrDefault(p =>
-						p.ProductId == ItemId);
+						p.Id == ItemId);
 
 				if (product != null)
 				{
@@ -84,8 +84,8 @@ namespace YatesMorrison.SiteSmith.Web.Admin.Products
 
 						ProductTag productTag = new ProductTag
 						{
-							ProductIdFk = product.ProductId,
-							TagIdFk = tagId
+							ProductId = product.Id,
+							TagId = tagId
 						};
 						context.ProductTags.InsertOnSubmit(productTag);
 						try
@@ -110,13 +110,13 @@ namespace YatesMorrison.SiteSmith.Web.Admin.Products
 				using (SiteSmithDataContext context = new SiteSmithDataContext())
 				{
 					Product product = context.Products.FirstOrDefault(p =>
-								p.ProductId == ItemId);
+								p.Id == ItemId);
 
 					if (product != null)
 					{
 						ProductTag productTag = context.ProductTags.FirstOrDefault(t =>
-							t.TagIdFk == new Guid(e.CommandArgument.ToString()) &&
-								t.ProductIdFk == product.ProductId);
+							t.TagId == new Guid(e.CommandArgument.ToString()) &&
+								t.ProductId == product.Id);
 
 						if (productTag != null)
 						{

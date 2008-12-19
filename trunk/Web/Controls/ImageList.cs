@@ -40,12 +40,12 @@ namespace YatesMorrison.SiteSmith.Web.Controls
 				{
 					Image image = new Image
 					{
-						ID = this.ID + "_Image_" + media.MediaId,
+						ID = this.ID + "_Image_" + media.Id,
 						CssClass = ImageCssClass,
 						ToolTip = media.Name,
 						ImageUrl = string.Format(
 							"~/Include/ImageHandler.ashx?id={0}&size={1}",
-							media.MediaId, (int)ImageSize)
+							media.Id, (int)ImageSize)
 					};
 					Controls.Add(image);
 				}

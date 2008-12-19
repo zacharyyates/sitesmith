@@ -35,7 +35,7 @@ namespace YatesMorrison.SiteSmith.Web
 
 			using (SiteSmithDataContext dataContext = new SiteSmithDataContext())
 			{
-				var media = dataContext.Medias.Single(m => m.MediaId == mediaId);
+				var media = dataContext.Medias.Single(m => m.Id == mediaId);
 				fileExt = media.Extension;
 			}
 

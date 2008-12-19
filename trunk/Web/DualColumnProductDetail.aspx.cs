@@ -19,7 +19,7 @@ namespace YatesMorrison.SiteSmith.Web
 				using( SiteSmithDataContext context = new SiteSmithDataContext() )
 				{
 					DataItem = context.Products.FirstOrDefault(p =>
-						p.ProductId == ItemId);
+						p.Id == ItemId);
 
 					bpdcMain.DataItem = DataItem;
 					bpdcMain.DataBind();

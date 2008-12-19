@@ -35,7 +35,7 @@ namespace YatesMorrison.SiteSmith.Service
 			{
 				Media media = new Media
 				{
-					MediaId = mediaId,
+					Id = mediaId,
 					Size = data.Length,
 					Name = Path.GetFileNameWithoutExtension(fileName),
 					Path = path,

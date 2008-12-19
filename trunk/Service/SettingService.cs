@@ -18,13 +18,13 @@ namespace YatesMorrison.SiteSmith.Service
 		{
 			return GetSetting(name, Thread.CurrentThread.CurrentUICulture.Name);
 		}
-		public static string GetSetting( string name, string language )
+		public static string GetSetting( string name, string culture )
 		{
 			using (SiteSmithDataContext context = new SiteSmithDataContext())
 			{
 				Setting setting = context.Settings.FirstOrDefault(s =>
 					s.Name.ToLower() == name.ToLower() &&
-					s.Language.ToLower() == language.ToLower());
+					s.Culture.ToLower() == culture.ToLower());
 
 				if (setting != null)
 				{
@@ -40,7 +40,7 @@ namespace YatesMorrison.SiteSmith.Service
 						foreach (Setting s in context.Settings.Where(s =>
 												s.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)))
 						{
-							TranslationMode mode = new TranslationMode(s.Language, language);
+							TranslationMode mode = new TranslationMode(s.Culture, culture);
 							// Translate the first entry that can be translated
 							if (translator.CanTranslate( mode ) && 
 								s.AutoTranslate.HasValue &&
@@ -53,7 +53,7 @@ namespace YatesMorrison.SiteSmith.Service
 					}
 
 					throw new InvalidOperationException(
-						string.Format("Setting {0} for language {1} not found.", name, language));
+						string.Format("Setting {0} for language {1} not found.", name, culture));
 				}
 			}
 		}
