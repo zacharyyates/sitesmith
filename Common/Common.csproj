@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{22BE9A03-DD56-4A43-8D60-C064A9B65F8C}</ProjectGuid>
+    <ProjectGuid>{9A23D3D3-F860-4254-ACB8-D4E3B3A3E857}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>YatesMorrison.SiteSmith.Data</RootNamespace>
-    <AssemblyName>SiteSmith.Data</AssemblyName>
+    <RootNamespace>YatesMorrison.Common</RootNamespace>
+    <AssemblyName>Common</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -35,9 +35,6 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -48,47 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IRepository.cs" />
-    <Compile Include="Model\IIdentifiable.cs" />
-    <Compile Include="Model\INameable.cs" />
-    <Compile Include="Model\MediaType.cs" />
-    <Compile Include="Model\SiteSmithDataContext.cs" />
-    <Compile Include="Model\Tag.cs" />
+    <Compile Include="IService.cs" />
+    <Compile Include="IServiceProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="Repository.cs" />
-    <Compile Include="SiteSmith.cs">
-      <DependentUpon>SiteSmith.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="SiteSmith.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SiteSmith.dbml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="SiteSmith.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>SiteSmith.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="SiteSmith.dbml.layout">
-      <DependentUpon>SiteSmith.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
