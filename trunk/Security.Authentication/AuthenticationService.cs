@@ -3,8 +3,6 @@
  * 4/4/2008 3:06:07 PM
  */
 
-using System;
-
 namespace YatesMorrison.Security.Authentication
 {
 	public class AuthenticationService

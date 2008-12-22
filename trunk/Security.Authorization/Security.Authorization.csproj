@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{BCF6C7B9-9752-4FA6-916C-60778BCD432E}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -53,6 +53,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Authorization.dbml</DependentUpon>
     </Compile>
+    <Compile Include="AuthorizationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

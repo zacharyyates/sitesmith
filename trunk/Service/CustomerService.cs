@@ -14,6 +14,7 @@ namespace YatesMorrison.SiteSmith.Service
 {
 	public class CustomerService
 	{
+		// TODO: Refactor this into authentication service & authorization service methods
 		public Customer Register(string emailAddress, string password)
 		{
 			// Create the record
