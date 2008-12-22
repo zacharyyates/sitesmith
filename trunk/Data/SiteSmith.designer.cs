@@ -3216,7 +3216,7 @@ namespace YatesMorrison.SiteSmith.Data
 		
 		private string _Path;
 		
-		private System.Nullable<MediaType> _Type;
+		private System.Nullable<byte> _Type;
 		
 		private System.Nullable<int> _Size;
 		
@@ -3244,7 +3244,7 @@ namespace YatesMorrison.SiteSmith.Data
     partial void OnNameChanged();
     partial void OnPathChanging(string value);
     partial void OnPathChanged();
-    partial void OnTypeChanging(System.Nullable<MediaType> value);
+    partial void OnTypeChanging(System.Nullable<byte> value);
     partial void OnTypeChanged();
     partial void OnSizeChanging(System.Nullable<int> value);
     partial void OnSizeChanged();
@@ -3329,7 +3329,7 @@ namespace YatesMorrison.SiteSmith.Data
 		}
 		
 		[Column(Storage="_Type", DbType="TinyInt")]
-		public System.Nullable<MediaType> Type
+		public System.Nullable<byte> Type
 		{
 			get
 			{
