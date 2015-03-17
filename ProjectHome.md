@@ -1,0 +1,1 @@
+SiteSmith is a general retail website template with a couple of extra features thrown in
